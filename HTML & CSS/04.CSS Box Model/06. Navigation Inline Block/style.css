@@ -1,0 +1,26 @@
+html {
+    font-family: Helvetica, sans-serif;
+}
+
+body {
+    margin: 50px;
+}
+
+li, h1, nav {
+    display: inline-block;
+}
+
+a {
+    color: rgb(16, 168, 16);
+    margin-right: 30px;
+}
+
+h1 {
+    margin-right: 30px;
+}
+
+h2 {
+    font-weight: 300;
+}
+
+
