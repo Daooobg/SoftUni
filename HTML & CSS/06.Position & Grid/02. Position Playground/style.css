@@ -1,0 +1,49 @@
+@import url('https://use.fontawesome.com/releases/v5.6.3/css/all.css');
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.viewport {
+  display: block;
+  height: 50vh;
+  width: 100%;
+}
+.card {
+  display: block;
+  position: absolute;
+  width: 300px;
+}
+
+img {
+  width: 100%;
+}
+
+.viewport-blue {
+  background: linear-gradient(90deg, #007fd7 0%, #449684 100%);
+}
+
+.viewport-blue .card {
+  left: 50%;
+  top: 25%;
+  transform: translate(-50%, -50%);
+}
+
+.viewport-orange {
+  background: linear-gradient(90deg, #d7006d 0%, #d77e00 100%);
+
+}
+
+.viewport-orange .card {
+  left: 50%;
+  top: 75%;
+  transform: translate(-50%, -50%);
+}
+
+i {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: white;
+}
