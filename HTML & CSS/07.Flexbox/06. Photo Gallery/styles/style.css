@@ -1,0 +1,31 @@
+body {
+  background-color: lightgray;
+  display: flex;
+}
+
+ul,
+li {
+  display: flex;
+}
+
+.gallery {
+  margin: 150px;
+}
+.gallery ul {
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.gallery ul li {
+  width: 400px;
+  border: 10px solid black;
+  padding: 30px;
+  align-items: center;
+  box-shadow: 0 0 15px 1px black;
+}
+
+.gallery ul li img {
+  width: 100%;
+  height: auto;
+}
