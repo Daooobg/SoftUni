@@ -1,0 +1,23 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(238, 238, 238);
+}
+
+.card {
+  background-color: rgb(255, 255, 255);
+  width: 400px;
+  border-radius: 4px;
+  padding: 20px;
+  box-shadow: 0 0 20px 1px black;
+}
+
+.card .card__title {
+  font-size: 22px;
+}
+
+.card .card__meta {
+  font-size: 18px;
+  padding-bottom: 15px;
+}

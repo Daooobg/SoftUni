@@ -1,0 +1,54 @@
+body {
+  background-color: rgb(238, 238, 238);
+}
+
+h2 {
+  margin-left: 350px;
+}
+
+.card {
+  width: 300px;
+  border-radius: 6px;
+  border: 2px solid silver;
+  overflow: hidden;
+}
+
+.card .card__image {
+  width: 100%;
+  height: auto;
+}
+
+.card .card__title {
+  padding: 20px 20px 1px 20px;
+  font-weight: 300;
+  font-size: 16px;
+}
+
+.card .card__content {
+  padding: 10px 20px 10px 20px;
+  font-weight: 200;
+  font-size: 14px;
+}
+
+.card .card__footer {
+  padding: 20px;
+  font-weight: 200;
+  font-size: 14px;
+  border-top: 1px solid silver;
+}
+
+.cards-layout {
+  width: 60%;
+  margin: 20px auto;
+}
+
+.masonry {
+  column-count: 3;
+  gap: 20px;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
