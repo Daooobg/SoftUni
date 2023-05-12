@@ -1,0 +1,106 @@
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+}
+
+body {
+  background-color: rgb(238, 238, 238);
+  margin: 20px;
+}
+
+p {
+  margin: 10px 0;
+}
+
+.page > header {
+  width: 100%;
+  border-bottom: 2px solid black;
+}
+
+.page header p {
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding-bottom: 10px;
+}
+
+h2,
+h3 {
+  font-family: Georgia, serif;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+}
+
+.image {
+  padding: 10px;
+  background-color: rgb(255, 255, 255);
+  border: 2px solid black;
+  box-shadow: 0 0 10px black;
+  margin-bottom: 10px;
+}
+
+.page article section blockquote {
+  font-family: Georgia, serif;
+  font-style: italic;
+  font-weight: 700;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  float: right;
+  border-left: 4px solid rgb(187, 197, 207);
+  color: rgb(117, 120, 123);
+}
+
+@media (min-width: 500px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 600px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 800px) {
+  html {
+    font-size: 18px;
+  }
+  .page {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .page article section blockquote p:last-child {
+    float: right;
+  }
+  .page article section blockquote {
+    width: 50%;
+    float: right;
+  }
+  .page article section .float-right {
+    float: right;
+    margin-left: 20px;
+  }
+
+  .page article section .float-left {
+    float: left;
+    margin-right: 20px;
+  }
+}
+
+@media (min-width: 1300px) {
+  html {
+    font-size: 21px;
+  }
+  p {
+    margin: 30px 0;
+  }
+}
+
+@media (min-width: 1800px) {
+  html {
+    font-size: 23px;
+  }
+}
