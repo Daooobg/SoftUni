@@ -1,5 +1,5 @@
 DELIMITER $$
-CREATE FUNCTION  ufn_calculate_future_value(sum DECIMAL(19,4), rate DOUBLE, years INT)
+CREATE FUNCTION  ufn_calculate_future_value(sum DECIMAL(19,4), rate DECIMAL(19, 4), years INT)
 RETURNS DECIMAL(19,4)
 DETERMINISTIC
 BEGIN
