@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap');
+
+html {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.fitness-section {
+  max-width: 1300px;
+  margin: 60px auto;
+  border: 1px solid black;
+  border-radius: 18px;
+  overflow: hidden;
+  display: flex;
+  text-align: center;
+  box-shadow: 0 5px 8px 3px rgb(150 150 150);
+}
+
+.fitness-section img {
+  width: 50%;
+  backdrop-filter: brightness(60%);
+  -webkit-filter: brightness(60%);
+}
+.calculator {
+    width: 44%;
+    margin: 0 auto;
+}
+.calculator h2{
+    padding: 50px;
+    font-size: 32px;
+}
+
+.btn {
+    width: 30%;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border-radius: 10px;
+     border: 1px solid rgb(160 160 161);
+}
+
+.btn.active-btn {
+    margin-right: 100px;
+    background-color: rgb(134 216 98);
+}
+
+.calculator h3 {
+    padding: 24px;
+    font-weight: 500;
+}
+
+#gender {
+    width: 36%;
+    height: 20px;
+    font-size: 16px;
+    margin-right: 40px;
+}
+
+.years {
+    width: 30%;
+    height: 20px;
+    font-size: 16px;
+}
+
+.weight {
+    width: 80%;
+    border: 1px solid rgb(190 190 191);
+    border-radius: 6px;
+}
+
+.feet, .inches {
+    width: 45%;
+    height: 20px;
+    font-size: 16px;
+    margin-bottom: 60px;
+    border: 1px solid rgb(190 190 191);
+    border-radius: 6px;
+}
+
+.feet {
+    margin-right: 10px;
+}
+
+.calc-btn {
+    width: 100%;
+    border-radius: 16px;
+    background-color: rgb(5 162 211);
+    border: none;
+    color: white;
+    font-weight: 700;
+  box-shadow: 0 5px 8px 3px rgb(150 150 150);
+
+}
+
+

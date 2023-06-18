@@ -1,0 +1,246 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+body {
+  max-width: 1980px;
+  margin: 0 auto;
+  font-family: 'Lato', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.container-80 {
+  width: 86%;
+}
+
+.navigation {
+  display: flex;
+  height: 60px;
+
+  margin: 20px auto;
+  /* align-items: center; */
+  justify-content: space-between;
+}
+
+.navigation .links {
+  display: flex;
+  gap: 20px;
+}
+
+.navigation .links a {
+  text-decoration: none;
+  color: rgb(84 84 109);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+.main-section {
+  position: relative;
+  background-color: rgb(84 84 109);
+  height: 50vh;
+  margin-bottom: calc(50vh - 70px);
+}
+
+.calculator {
+  position: absolute;
+  top: 50%;
+  left: 1%;
+  transform: translate(-50%, -50%);
+}
+
+.courses {
+  text-align: center;
+  padding-top: 80px;
+}
+
+.courses > h2 {
+  font-size: 30px;
+  color: white;
+  padding-bottom: 80px;
+}
+
+.tax-lists {
+  width: 90%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+
+  padding-inline-start: 0;
+}
+
+.tax {
+  height: 50vh;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.tax-information {
+  height: calc(74% - 40px);
+  margin: 40px 40px 0 40px;
+}
+
+.tax-information h3 {
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+
+.tax-information p {
+  font-size: 22px;
+  padding-bottom: 30px;
+}
+
+.tax-information .one-child {
+  padding-bottom: 80px;
+}
+
+.tax-information a {
+  text-decoration: none;
+  background-color: rgb(154 93 198);
+  color: white;
+  font-size: 20px;
+  padding: 16px 30px;
+  border-radius: 30px;
+}
+
+.price_container {
+  /* background-color: red; */
+  height: 26%;
+}
+
+.tax-lists .tax:first-child .price_container {
+  background-image: linear-gradient(to right, rgb(2 154 60), rgb(76 215 129));
+}
+
+.tax-lists .tax:nth-child(2n) .price_container {
+  background-image: linear-gradient(
+    to right,
+    rgb(76 107 135),
+    rgb(122 167 210)
+  );
+}
+
+.tax-lists .tax:nth-child(3n) .price_container {
+  background-image: linear-gradient(
+    to right,
+    rgb(74 55 165),
+    rgb(141 126 226)
+  );
+}
+
+.price_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white ;
+}
+
+.price_container div {
+    height: 80%;
+    width: 100%;
+    padding: 10px 10px;
+    text-align: center;
+
+}
+
+.price_container div:nth-child(2n) {
+    border-left: 2px solid white;
+}
+
+.price_container h4 {
+    font-size: 30px;
+}
+
+.price_container p {
+    font-size: 20px;
+}
+
+.classes-section{
+    width: 70%;
+    margin: 0 auto;
+}
+
+.classes-section h2 {
+    font-size: 30px;
+    font-weight: 400;
+    padding-bottom: 26px;
+}
+
+.classes-section > p {
+    font-size: 21px;
+    padding-bottom: 50px;
+}
+
+.class {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 10fr 2fr 1fr;
+    align-items: center;
+}
+
+.class:first-child {
+    border-top-left-radius: 14px;
+}
+
+.class p {
+    font-size: 26px;
+    padding: 10px 20px;
+}
+
+.class:nth-child(1n){
+    background-color: rgb(230 230 230);
+}
+
+.class:nth-child(2n) {
+   background-color: rgb(248 248 248) ; 
+}
+
+.finance-section {
+    width: 86%;
+    margin: 120px auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+}
+
+.finance-info {
+    width: 62%;
+}
+
+.finance-info h3 {
+    font-size: 30px;
+    font-weight: 500;
+    padding-bottom: 16px;
+}
+
+.finance-info p {
+    font-size: 20px;
+}
+
+.finance-info p:nth-child(2){
+    padding-bottom: 20px;
+}
+
+.finance-section img {
+    width: 30%;
+}
+
+footer {
+    height: 120px;
+    background-color: rgb(84 84 109);
+    color: rgb(144 142 171);
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

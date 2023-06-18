@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+:root {
+    --blue: rgb(50, 125, 196);
+    --light-blue: rgb(129, 157, 175);
+    --dark-blue: rgb(50, 73, 196)
+}
+
+
+html {
+    font-family: 'Poppins', sans-serif;
+}
+
+.financial-section {
+    margin: 30px auto;
+    max-width: 1600px;
+}
+
+.financial-section header {
+    text-align: center;
+    padding-bottom: 24px;
+}
+
+.financial-section header h1 {
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.financial-section header h1 .blue {
+    color: var(--blue);
+}
+
+.financial-section header p {
+    font-size: 18px;
+}
+
+.financial-section .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.financial-section .card {
+    background-color: var(--light-blue);
+    border-radius: 18px;
+}
+
+.financial-section .card img {
+    width: 100%;
+    border-radius: 18px;
+}
+
+.financial-section .container {
+    margin: 30px 26px 20px 20px;
+}
+
+.financial-section .container h2 {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -1px;
+    padding-bottom: 24px;
+}
+
+.financial-section .container p {
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 18px;
+}
+
+.financial-section .container .btn {
+    text-decoration: none;
+    font-size: 16px;
+    color: white;
+    padding: 6px 20px;
+    background-color: var(--blue);
+    border: 1px solid var(--dark-blue);
+    border-radius: 20px;
+    box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.8);
+}

@@ -1,0 +1,136 @@
+@media (max-width:600px) {
+    body {
+        font-size: 10px;
+    }
+
+    .div-header {
+        display: none;
+    }
+
+    .options {
+        flex-direction: column;
+    }
+
+    .options article {
+        width: 100%;
+        text-align: center;
+    }
+
+    .options a {
+        display: none;
+    }
+
+    .options article h4 {
+        font-size: 16px;
+    }
+
+    main h2 {
+        font-size: 18px;
+    }
+
+    .gallery {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .gallery article > img {
+        width: 190px;
+        height: 100px;
+        padding-bottom: 10px;
+    }
+
+    .gallery article a {
+        display: none;
+    }
+
+    .gallery article p {
+        padding-bottom: 10px;
+    }
+
+    .blog-title h4 span {
+        display: none;
+    }
+
+    .blog-title a {
+        display: none;
+    }
+
+    .blog-title {
+        padding-left: 80px;
+    }
+
+    .blog-title h4 {
+        font-size: 18px;
+    }
+
+    .blog article img {
+        display: none;
+    }
+
+    #about-blog {
+        width: 90%;
+    }
+
+    #about-blog p {
+        font-size: 9px;
+    }
+
+    #about-blog button {
+        padding: 5px 8px;
+        font-size: 9px;
+    }
+
+    .magazine-title {
+        padding: 20px 0 0 80px
+    }
+    
+    .magazine-title h4 {
+        font-size: 18px;
+    }
+
+    .magazine-title h4 span {
+        display: none;
+    }
+
+    .magazine-title a {
+        display: none;
+    }
+
+    .magazine article {
+        flex-direction: column;
+        align-items: center;
+        margin: 0 auto;
+    }
+
+    .magazine-info {
+        margin: 0;
+        text-align: center;
+    }
+
+    .magazine-info img {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+    }
+
+    .magazine-info p {
+        padding-top: 20px;
+        font-size: 12px;
+    }
+
+    .magazine-info button {
+        padding: 5px 8px;
+    }
+
+    footer {
+        flex-direction: column;
+    }
+    .icons {
+        display:  flex;
+        flex-direction: column;
+    }
+
+    .icons a i.fa {
+        font-size: 12px;
+    }
+}
