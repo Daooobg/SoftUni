@@ -1,0 +1,295 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://use.fontawesome.com/releases/v5.6.3/css/all.css');
+
+:root {
+  --light-blue: #ade2df;
+  --silver: #dbdbdb;
+}
+
+html {
+  font-family: 'Inter', sans-serif;
+}
+
+.nav {
+  width: 76%;
+  height: 15vh;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.nav a {
+  text-decoration: none;
+  color: black;
+}
+
+.nav-links {
+  display: flex;
+  gap: 50px;
+}
+
+.auth-links {
+  display: flex;
+  gap: 5px;
+}
+
+.auth-links li {
+  padding: 20px 30px;
+  border-radius: 12px;
+}
+
+.auth-links li:nth-child(2n) {
+  background-color: var(--light-blue);
+  font-weight: 500;
+}
+
+.hero-section {
+  height: 520px;
+  background-color: var(--light-blue);
+  text-align: center;
+}
+
+.hero-section h1 {
+  font-size: 80px;
+  font-weight: 600;
+  padding-top: 110px;
+  padding-bottom: 30px;
+}
+
+.hero-section p {
+  font-size: 22px;
+  padding-bottom: 60px;
+}
+
+.btn-black {
+  color: white;
+  background-color: black;
+}
+
+.hero-btn {
+  padding: 20px 40px;
+  font-size: 20px;
+}
+
+.btn {
+  border: none;
+  border-radius: 8px;
+}
+
+.hero-btns button:first-child {
+  margin-right: 14px;
+}
+
+.info-section {
+  width: 70%;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.info-section > div {
+  margin: 100px 0;
+  border-left: 1px solid var(--silver);
+  border-right: 1px solid var(--silver);
+  text-align: center;
+}
+
+.info-section h2 {
+  font-size: 40px;
+  font-weight: 600;
+}
+
+.info-section p {
+  font-size: 22px;
+  font-weight: 400;
+  padding: 40px 10px 110px 10px;
+}
+
+.everything-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--light-blue);
+}
+
+.everything-section > img {
+  border: 2px dashed #98b8b6;
+}
+
+.everything-section > div {
+  width: 36%;
+  margin-left: 80px;
+}
+
+.everything-section h2 {
+  font-size: 50px;
+  font-weight: 600;
+  padding-bottom: 30px;
+}
+
+.everything-section p {
+  font-size: 20px;
+  padding-bottom: 30px;
+}
+
+.everything-section .bolded {
+  font-weight: 600;
+  padding-bottom: 10px;
+}
+
+.everything-section a {
+  text-decoration: none;
+  font-size: 20px;
+  color: black;
+  padding-bottom: 3px;
+  border-bottom: 1px solid black;
+}
+
+.max-width-btn {
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.blue-btn {
+  background-color: var(--light-blue);
+}
+
+.fees-section {
+  text-align: center;
+  margin-top: 80px;
+}
+
+.fees-section > header > a {
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
+  font-weight: 500;
+  padding: 10px 20px;
+}
+
+.fees-section h1 {
+  font-size: 40px;
+  padding: 40px 0 80px 0;
+}
+
+.fees-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 2fr;
+  border: 1px solid #dbdbdb;
+  border-top-right-radius: 18px;
+  border-bottom-right-radius: 18px;
+}
+
+.expand-container {
+  background-color: var(--light-blue);
+}
+
+.normal-container-info {
+  margin: 30px auto;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-right: 1px solid #dbdbdb;
+}
+
+.normal-container-info h4 {
+  font-size: 26px;
+}
+
+.normal-container-info p {
+  text-align: left;
+  font-size: 20px;
+}
+
+.normal-container-info h2 {
+  font-size: 40px;
+  font-weight: 600;
+  text-align: left;
+  padding-top: 20px;
+}
+
+.normal-container-info h2 span {
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.underline {
+  width: 100%;
+  height: 1px;
+  background-color: #dbdbdb;
+}
+
+.normal-container-info ul {
+  padding-inline-start: 0;
+  text-align: left;
+  font-weight: 400;
+  padding-bottom: 40px;
+}
+
+.expand-container-info {
+  margin: 30px auto;
+  padding-left: 30px;
+  padding-right: 30px;
+  text-align: left;
+}
+
+.expand-container-info h4 {
+  font-size: 26px;
+  text-align: center;
+}
+
+.expand-container-info h2 {
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.expand-container-info ul {
+    padding-inline-start: 0;
+    text-align: left;
+    font-weight: 400;
+    padding-bottom: 140px;
+
+  }
+
+  .get-section {
+    height: 70vh;
+    background-color: var(--light-blue);
+    margin-top: 50px;
+  }
+
+  .get-section-info  {
+    width: 40%;
+    margin: 0 auto;
+   text-align: center;
+  }
+
+  .get-section-info h2 {
+    padding-top: 120px;
+    font-size: 70px;
+  }
+
+  .get-section-info p {
+    font-size: 24px;
+    padding-bottom: 50px;
+  }
+
+  .footer {
+    width: 90%;
+    height: 12vh;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer p {
+    font-size: 20px;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 20px;
+  }

@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --bg: #d9d9d9;
+    --dark-silver: #595959;
+    --light-silver: #acacac;
+}
+
+html {
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg);
+}
+
+.cards-section {
+    width: 88%;
+    margin: 60px auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.card {
+    box-shadow: 0 0 10px 5px #c8c8c8;
+}
+
+.card > img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+}
+
+.card-info {
+    width: 82%;
+    margin: 40px auto;
+}
+
+.card-info h4 {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--dark-silver);
+    padding-bottom: 8px;
+}
+
+.card-info h2 {
+    font-size: 28px;
+    font-weight: 400;
+    padding-bottom: 30px;
+}
+
+.card-info > p {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--dark-silver);
+    padding-bottom: 30px;
+}
+
+.dash  {
+    width: 100%;
+    height: 2px;
+    background-color: var(--dark-silver);
+    margin-bottom: 20px;
+}
+
+.card .author {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.author-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 90px;
+}
+
+.author > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.author p {
+    font-size: 20px;
+    color: var(--dark-silver);
+}
+
+.author .read-para {
+    color: var(--light-silver);
+}
