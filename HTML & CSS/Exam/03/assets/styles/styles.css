@@ -161,6 +161,8 @@ html {
 .fees-section {
   text-align: center;
   margin-top: 80px;
+  border-top-right-radius: 16px;
+  overflow: hidden;
 }
 
 .fees-section > header > a {
@@ -182,6 +184,7 @@ html {
   border: 1px solid #dbdbdb;
   border-top-right-radius: 18px;
   border-bottom-right-radius: 18px;
+  overflow: hidden;
 }
 
 .expand-container {
