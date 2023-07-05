@@ -40,3 +40,13 @@ export const updateOne =
     });
     return result;
   };
+
+export const deleteOne =
+  <T extends IProduct>(Model: Model<T>) =>
+  async (slugData: string): Promise<T | null> => {
+    if (!slugData) {
+      return null;
+    }
+
+    return await Model.findOneAndDelete({ slug: slugData });
+  };
