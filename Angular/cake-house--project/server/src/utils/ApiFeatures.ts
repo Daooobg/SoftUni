@@ -1,4 +1,6 @@
-export  interface QueryString {
+import { Document, Query } from 'mongoose';
+
+export interface QueryString {
   [key: string]: string | undefined;
   page?: string;
   sort?: string;
@@ -6,12 +8,11 @@ export  interface QueryString {
   fields?: string;
 }
 
-
-export class APIFeatures {
-  query: any;
+export class APIFeatures<T extends Document> {
+  query: Query<T[], T>;
   queryString: QueryString;
 
-  constructor(query: any, queryString: QueryString) {
+  constructor(query: Query<T[], T>, queryString: QueryString) {
     this.query = query;
     this.queryString = queryString;
   }
