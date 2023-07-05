@@ -1,4 +1,4 @@
-import { Types } from 'mongoose';
+import { Types, UpdateQuery } from 'mongoose';
 import { NextFunction, Request, Response } from 'express';
 
 import catchAsync from '../utils/catchAsync';
@@ -8,6 +8,7 @@ import { QueryString } from '../utils/ApiFeatures';
 interface Services {
   createOne: (data: {}, objectId: Types.ObjectId) => Promise<object | null>;
   getAll: (query: QueryString) => Promise<object[]>;
+  updateOne: <T>(slug: string, data: UpdateQuery<T>) => {};
 }
 
 export const createOne = <T extends Services>(ModelService: T) =>
@@ -34,6 +35,21 @@ export const getAll = <T extends Services>(ModelService: T) =>
     res.status(200).json({
       status: 'success',
       result: data.length,
+      data: data,
+    });
+  });
+
+export const updateOne = <T extends Services>(ModelService: T) =>
+  catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+    console.log(req);
+    const data = await ModelService.updateOne(req.params.slug, req.body);
+
+    if (!data) {
+      return next(new AppError(`No data found for: ${req.params.slug}`, 404));
+    }
+
+    res.status(200).json({
+      status: 'success',
       data: data,
     });
   });
