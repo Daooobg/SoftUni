@@ -9,6 +9,7 @@ interface Services {
   createOne: (data: {}, objectId: Types.ObjectId) => Promise<object | null>;
   getAll: (query: QueryString) => Promise<object[]>;
   updateOne: <T>(slug: string, data: UpdateQuery<T>) => {};
+  deleteOne: (slug: string) => Promise<object | null>;
 }
 
 export const createOne = <T extends Services>(ModelService: T) =>
@@ -51,5 +52,19 @@ export const updateOne = <T extends Services>(ModelService: T) =>
     res.status(200).json({
       status: 'success',
       data: data,
+    });
+  });
+
+export const deleteOne = <T extends Services>(ModelService: T) =>
+  catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+    const data = await ModelService.deleteOne(req.params.slug);
+
+    if (!data) {
+      return next(new AppError(`No data found for: ${req.params.slug}`, 404));
+    }
+
+    res.status(204).json({
+      status: 'success',
+      data: null,
     });
   });
