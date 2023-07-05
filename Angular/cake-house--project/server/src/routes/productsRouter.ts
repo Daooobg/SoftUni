@@ -3,8 +3,6 @@ import { RequestHandler, Router } from 'express';
 import * as candyController from '../controllers/candyController';
 import { restrictTo } from '../middlewares/authMiddleware';
 
-const restrict = restrictTo('admin', 'owner');
-
 const router = Router();
 
 router
@@ -17,6 +15,10 @@ router
   .put(
     restrictTo('admin', 'owner') as RequestHandler,
     candyController.updateOne
+  )
+  .delete(
+    restrictTo('admin', 'owner') as RequestHandler,
+    candyController.deleteOne
   );
 
 export default router;
