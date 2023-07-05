@@ -27,3 +27,17 @@ export const register = catchAsync(
     res.status(200).json(token);
   }
 );
+
+export const login = catchAsync(
+  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return next(new AppError('Please provide username and password', 400));
+    }
+
+    const data = await authService.login(email, password);
+
+    res.status(200).json(data);
+  }
+);
