@@ -1,4 +1,5 @@
-import mongoose, { Model } from 'mongoose';
+import mongoose, { Model, UpdateQuery } from 'mongoose';
+import slug from 'slug';
 
 import { APIFeatures, QueryString } from '../utils/ApiFeatures';
 
@@ -23,4 +24,19 @@ export const getAll =
       .limitFields()
       .paginate();
     return (await feature.query) as object[];
+  };
+
+export const updateOne =
+  <T extends IProduct>(Model: Model<T>) =>
+  async (slugData: string, data: UpdateQuery<T>): Promise<T | null> => {
+    if (data.name) {
+      data.slug = slug(`${data.name}`, {
+        lower: true,
+      });
+    }
+    const result = await Model.findOneAndUpdate({ slug: slugData }, data, {
+      new: true,
+      runValidators: true,
+    });
+    return result;
   };
