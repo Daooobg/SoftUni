@@ -1,7 +1,8 @@
-import User from '../models/userModel';
 import dotenv from 'dotenv';
-import jwt from '../lib/jsonwebtoken';
 
+import User from '../models/userModel';
+import jwt from '../lib/jsonwebtoken';
+import AppError from '../utils/AppError';
 
 dotenv.config({ path: './config.env' });
 
@@ -41,4 +42,24 @@ export const register = async (
 ) => {
   const user = await User.create({ name, email, password, repeatPassword });
   return createAndSendToken(user);
+};
+
+const getUserByEmail = (email: string) => User.findOne({ email });
+
+export const login = async (email: string, password: string) => {
+
+  const user = await getUserByEmail(email);
+
+  if (!user) {
+    throw new AppError('Invalid Username or Password!', 401);
+  }
+
+  const isValid = await user.validatePassword(password);
+
+  if (!isValid) {
+    throw new AppError('Invalid Username or Password!', 401);
+  }
+
+  const response = await createAndSendToken(user);
+  return response;
 };
