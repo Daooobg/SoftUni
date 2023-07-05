@@ -4,6 +4,9 @@ import * as candyController from '../controllers/candyController';
 
 const router = Router();
 
-router.route('/candies').post(candyController.createOne);
+router
+  .route('/candies')
+  .get(candyController.getAll)
+  .post(candyController.createOne);
 
 export default router;
