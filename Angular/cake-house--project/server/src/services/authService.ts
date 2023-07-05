@@ -29,6 +29,7 @@ const createAndSendToken = async (user: {
       name: user.name,
       email: user.email,
       userId: user._id,
+      role: user.role,
     };
     return response;
   }
@@ -47,7 +48,6 @@ export const register = async (
 const getUserByEmail = (email: string) => User.findOne({ email });
 
 export const login = async (email: string, password: string) => {
-
   const user = await getUserByEmail(email);
 
   if (!user) {
