@@ -1,5 +1,14 @@
 import { Request, Response, NextFunction } from 'express';
+import { Error } from 'mongoose';
+import { MongoError } from 'mongodb';
 import AppError from '../utils/AppError';
+
+interface AppErrorInterface extends Error {
+  statusCode: number;
+  status: string;
+  isOperational: boolean;
+  // code?: number
+}
 
 const sendError = (err: AppError, res: Response) => {
   if (err.isOperational) {
@@ -20,16 +29,20 @@ const handleCastError = (err: any) => {
   return new AppError(message, 400);
 };
 
-const handleValidationError = (err: any) => {
+const handleValidationError = (err: Error.ValidationError) => {
   const errors = Object.values(err.errors).map((el: any) => el.message);
   const message = `Invalid input data: ${errors.join('. ')}`;
   return new AppError(message, 400);
 };
 
-const handleDuplicateFields = (err: any) => {
-  const value = err.errmsg.match(/(["'])(\\?.)*?\1/)[0];
-  const message = `Duplicate field value: (${value}). Please use another value!`;
-  return new AppError(message, 400);
+const handleDuplicateFields = (err: MongoError) => {
+  const value = err.message.match(/(["'])(\\?.)*?\1/);
+  if (value) {
+    const message = `Duplicate field value: (${value[0]}). Please use another value!`;
+    return new AppError(message, 400);
+  } else {
+    return new AppError('Duplicate fields', 400);
+  }
 };
 
 const handleTokenExpiredError = () =>
@@ -39,7 +52,7 @@ const handleJWTError = () =>
   new AppError('Invalid token. Please log in again!', 401);
 
 const errorHandler = (
-  err: any,
+  err: AppErrorInterface,
   req: Request,
   res: Response,
   next: NextFunction
@@ -47,16 +60,16 @@ const errorHandler = (
   err.statusCode = err.statusCode || 500;
   err.status = err.status || 'error';
 
-  if (err.name === 'ValidationError') {
-    err = handleValidationError(err);
+  if (err instanceof Error.ValidationError) {
+    err = handleValidationError(err as Error.ValidationError);
   }
 
   if (err.name === 'CastError') {
     err = handleCastError(err);
   }
 
-  if (err.code === 11000) {
-    err = handleDuplicateFields(err); //TODO
+  if (err instanceof MongoError && err.code === 11000) {
+    err = handleDuplicateFields(err as MongoError); //TODO
   }
 
   if (err.name === 'TokenExpiredError') {
