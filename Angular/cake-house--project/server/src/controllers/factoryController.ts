@@ -42,7 +42,7 @@ export const getAll = <T extends Services>(ModelService: T) =>
 
 export const updateOne = <T extends Services>(ModelService: T) =>
   catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    console.log(req);
+    
     const data = await ModelService.updateOne(req.params.slug, req.body);
 
     if (!data) {
