@@ -5,7 +5,9 @@
       <li routerLinkActive="active"><a routerLink="/register">Register</a></li>
     </ul>
     <ul class="navigation__links" role="list">
-      <li routerLinkActive="active"><a routerLink="/">Home</a></li>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a routerLink="/">Home</a>
+      </li>
       <li routerLinkActive="active"><a>About Us</a></li>
       <li routerLinkActive="active"><a>Gallery</a></li>
       <li routerLinkActive="active"><a>Products </a></li>
