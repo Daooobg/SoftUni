@@ -1,3 +1,10 @@
 .hero-section {
   height: 70vh;
 }
+
+.hero-section__logo {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
