@@ -1,0 +1,32 @@
+.about-products-section {
+  background-color: rgb(238, 242, 243);
+}
+
+.about-products-section > div {
+  width: 90%;
+  margin: 0 auto;
+  padding: 4rem 0;
+  font-family: Roboto Slab, serif;
+}
+.about-products-section ul {
+  padding-inline-start: 2rem;
+}
+.about-products-section img {
+  float: right;
+  width: 30%;
+  margin: 1rem;
+}
+
+.about-products-section h2 {
+  font-size: 4rem;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
+  padding-bottom: 2rem;
+}
+
+.about-products-section p {
+  letter-spacing: 0.1rem;
+  font-size: 2.5rem;
+  line-height: 1.3;
+  margin-bottom: 1rem;
+}
