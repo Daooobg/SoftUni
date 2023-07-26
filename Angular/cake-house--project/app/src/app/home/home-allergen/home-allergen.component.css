@@ -1,0 +1,25 @@
+.container {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.allergen-free {
+  padding: 1rem;
+  width: 60%;
+  height: 8rem;
+  margin: 0 auto;
+}
+
+.allergen-free ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: start;
+  gap: 2rem;
+  padding: 0;
+  margin: 0;
+}
+
+.allergen-free ul li:hover {
+  padding: 1rem;
+  border: 0.5rem solid rgb(205, 125, 141);
+  border-radius: 50%;
+}
