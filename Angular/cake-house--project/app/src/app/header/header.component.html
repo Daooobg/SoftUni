@@ -1,12 +1,15 @@
 <header>
   <nav class="navigation">
-    <img class="navigation__logo" src="../../assets/img/logo.svg" alt="logo" />
     <ul class="navigation__links" role="list">
-      <li><a routerLink="/">Home</a></li>
-      <li><a>About Us</a></li>
-      <li><a>Gallery</a></li>
-      <li><a>Products </a></li>
-      <li><a>Contact Us</a></li>
+      <li routerLinkActive="active"><a routerLink="/login">Login</a></li>
+      <li routerLinkActive="active"><a routerLink="/register">Register</a></li>
+    </ul>
+    <ul class="navigation__links" role="list">
+      <li routerLinkActive="active"><a routerLink="/">Home</a></li>
+      <li routerLinkActive="active"><a>About Us</a></li>
+      <li routerLinkActive="active"><a>Gallery</a></li>
+      <li routerLinkActive="active"><a>Products </a></li>
+      <li routerLinkActive="active"><a>Contact Us</a></li>
     </ul>
   </nav>
 </header>

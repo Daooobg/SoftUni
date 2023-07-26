@@ -28,3 +28,7 @@ header {
   letter-spacing: 0.1rem;
   color: rgb(205, 125, 141);
 }
+
+.navigation__links li.active {
+  border-bottom: 0.2rem solid rgb(205, 125, 141);
+}
