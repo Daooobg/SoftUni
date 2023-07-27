@@ -1,0 +1,60 @@
+.container {
+  width: 100%;
+  min-height: 70vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  background: #f2f2f2;
+}
+
+.container form {
+  width: 30rem;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.wrap-input {
+  width: 100%;
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.wrap-input input {
+  width: 100%;
+  color: rgb(120, 118, 118);
+  background: transparent;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid silver;
+}
+
+.wrap-input  img {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    width: 1rem;
+    cursor: pointer;
+}
+
+.btn {
+    margin-top: 1rem;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.btn-link {
+    text-decoration: none;
+    color: red;
+}
+
+.form-changed-context {
+    text-align: right;
+}
+
+input.ng-invalid.ng-touched {
+    border-color: red;
+}

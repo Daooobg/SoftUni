@@ -1,0 +1,107 @@
+<div class="container">
+  <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+    <div class="wrap-input" *ngIf="!isLogin">
+      <input
+        type="text"
+        placeholder="Name:"
+        id="username"
+        ngModel
+        name="username"
+        required
+        minlength="3"
+        #username="ngModel"
+      />
+      <span *ngIf="!username.valid && username.touched"
+        >Name must be at least 3 characters</span
+      >
+    </div>
+    <div class="wrap-input" formGroupName="login">
+      <input
+        type="text"
+        placeholder="Email:"
+        id="email"
+        ngModel
+        name="email"
+        required
+        email
+        #email="ngModel"
+      />
+      <span *ngIf="!email.valid && email.touched"
+        >Please enter valid email</span
+      >
+    </div>
+    <div class="wrap-input" formGroupName="login">
+      <input
+        [type]="isVisible ? 'text' : 'password'"
+        placeholder="Password:"
+        id="password"
+        ngModel
+        name="password"
+        required
+        minlength="6"
+        #passwordA="ngModel"
+      />
+      <span *ngIf="!passwordA.valid && passwordA.touched"
+        >Name must be at least 6 characters</span
+      >
+      <img
+        src="../../assets/img/visibility.svg"
+        alt="visibility"
+        *ngIf="!isVisible"
+        (click)="onChangeVisibility()"
+      />
+      <img
+        src="../../assets/img/visibility_off.svg"
+        alt="visibility off"
+        *ngIf="isVisible"
+        (click)="onChangeVisibility()"
+      />
+    </div>
+    <div class="wrap-input" *ngIf="!isLogin">
+      <input
+        [type]="isVisible ? 'text' : 'password'"
+        placeholder="Repeat Password:"
+        id="repPassword"
+        ngModel
+        name="repPassword"
+        required
+        minlength="6"
+        #passwordB="ngModel"
+      />
+      <span *ngIf="!passwordB.valid && passwordB.touched"
+        >Name must be at least 6 characters</span
+      >
+      <span
+        *ngIf="
+          passwordB.value != passwordA.value &&
+          passwordA.touched &&
+          passwordB.touched
+        "
+        >Passwords don't mach</span
+      >
+      <img
+        src="../../assets/img/visibility.svg"
+        alt="visibility"
+        *ngIf="!isVisible"
+        (click)="onChangeVisibility()"
+      />
+      <img
+        src="../../assets/img/visibility_off.svg"
+        alt="visibility off"
+        *ngIf="isVisible"
+        (click)="onChangeVisibility()"
+      />
+    </div>
+    <div>
+      <button class="btn" type="submit" [disabled]="!authForm.valid">
+        {{ isLogin ? "Login" : "Register" }}
+      </button>
+    </div>
+    <div class="form-changed-context">
+      <span> You {{ isLogin ? "don’t" : "" }} have an account? </span>
+      <button class="btn" (click)="onChangeForm()" type="button">
+        {{ isLogin ? "Register" : "Login" }}
+      </button>
+    </div>
+  </form>
+</div>
