@@ -58,3 +58,9 @@
 input.ng-invalid.ng-touched {
     border-color: red;
 }
+
+.http-error {
+  text-align: center;
+  color: red;
+  margin-bottom: 2rem;
+}

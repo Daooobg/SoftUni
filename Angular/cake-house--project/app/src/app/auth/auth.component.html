@@ -1,5 +1,10 @@
+<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+
 <div class="container">
   <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+    <div class="http-error" *ngIf="error">
+      <div class="">{{ error }}</div>
+    </div>
     <div class="wrap-input" *ngIf="!isLogin">
       <input
         type="text"
