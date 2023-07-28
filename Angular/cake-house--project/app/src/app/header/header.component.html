@@ -1,7 +1,12 @@
 <header>
   <nav class="navigation">
     <ul class="navigation__links" role="list">
-      <li routerLinkActive="active"><a routerLink="/auth">Login</a></li>
+      <li routerLinkActive="active" *ngIf="!isAuthenticated">
+        <a routerLink="/auth">Login</a>
+      </li>
+      <li *ngIf="isAuthenticated">
+        <a style="cursor: pointer;" (click)="onLogout()">Logout</a>
+      </li>
     </ul>
     <ul class="navigation__links" role="list">
       <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
