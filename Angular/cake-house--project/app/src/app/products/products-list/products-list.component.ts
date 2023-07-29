@@ -12,13 +12,14 @@ import { Product } from '../product.model';
   styleUrls: ['./products-list.component.css'],
 })
 export class ProductsListComponent implements OnInit, OnDestroy {
-  products!: Product[] | null;
+  products: Product[] | null;
   error: string | null = null;
   isLoading: boolean = false;
   isAuthenticated = false;
+  role: string | undefined;
 
-  productsSub!: Subscription;
-  userSub!: Subscription;
+  productsSub: Subscription;
+  userSub: Subscription;
 
   constructor(private store: Store<fromApp.AppStore>) {}
 
@@ -36,6 +37,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
       .pipe(map((authState) => authState.user))
       .subscribe((user) => {
         this.isAuthenticated = !!user;
+        this.role = user?.role;
       });
   }
 

@@ -1,3 +1,7 @@
+<div *ngIf="role === 'owner' || role === 'admin'">
+  <a routerLink="new">Create New Product</a>
+</div>
+
 <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
 <div *ngIf="error" class="http-error">
   <div class="">{{ error }}</div>
@@ -7,7 +11,7 @@
     <img [src]="product.images[0]" [alt]="product.name" />
     <div class="product__info">
       <h2>
-        Name: <span>{{ product.name | uppercase}}</span>
+        Name: <span>{{ product.name | uppercase }}</span>
       </h2>
       <p class="product__desc">
         Description: {{ product.description | shorten : 150 }}
