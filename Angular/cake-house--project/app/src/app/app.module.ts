@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +22,7 @@ import { ProductsComponent } from './products/products.component';
 import { ProductsListComponent } from './products/products-list/products-list.component';
 import { ProductsModule } from './products/products.model';
 import { ShortenPipe } from './util/pipes/shorten.pipe';
+import { ProductCreateComponent } from './products/product-create/product-create.component';
 
 @NgModule({
   declarations: [
@@ -35,12 +36,14 @@ import { ShortenPipe } from './util/pipes/shorten.pipe';
     LoadingSpinnerComponent,
     ProductsComponent,
     ProductsListComponent,
-    ShortenPipe
+    ShortenPipe,
+    ProductCreateComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     StoreModule.forRoot({ auth: fromAuth.authReducer }),
     EffectsModule.forRoot([AuthEffects, ProductsEffects]),
