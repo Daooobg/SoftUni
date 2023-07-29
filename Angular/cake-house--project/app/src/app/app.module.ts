@@ -13,9 +13,15 @@ import { AuthComponent } from './auth/auth.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import * as fromAuth from './auth/store/auth.reducer';
+import { ProductsEffects } from './products/store/products.effects';
+
 import { AuthEffects } from './auth/store/auth.effects';
 import { HttpClientModule } from '@angular/common/http';
 import { LoadingSpinnerComponent } from './util/loading-spinner/loading-spinner.component';
+import { ProductsComponent } from './products/products.component';
+import { ProductsListComponent } from './products/products-list/products-list.component';
+import { ProductsModule } from './products/products.model';
+import { ShortenPipe } from './util/pipes/shorten.pipe';
 
 @NgModule({
   declarations: [
@@ -27,6 +33,9 @@ import { LoadingSpinnerComponent } from './util/loading-spinner/loading-spinner.
     HomeAllergenComponent,
     AuthComponent,
     LoadingSpinnerComponent,
+    ProductsComponent,
+    ProductsListComponent,
+    ShortenPipe
   ],
   imports: [
     BrowserModule,
@@ -34,7 +43,8 @@ import { LoadingSpinnerComponent } from './util/loading-spinner/loading-spinner.
     FormsModule,
     HttpClientModule,
     StoreModule.forRoot({ auth: fromAuth.authReducer }),
-    EffectsModule.forRoot([AuthEffects]),
+    EffectsModule.forRoot([AuthEffects, ProductsEffects]),
+    ProductsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
