@@ -1,0 +1,30 @@
+<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+<div *ngIf="error" class="http-error">
+  <div class="">{{ error }}</div>
+</div>
+<div class="products">
+  <div class="products__card" *ngFor="let product of products">
+    <img [src]="product.images[0]" [alt]="product.name" />
+    <div class="product__info">
+      <h2>
+        Name: <span>{{ product.name | uppercase}}</span>
+      </h2>
+      <p class="product__desc">
+        Description: {{ product.description | shorten : 150 }}
+      </p>
+      <div class="products__card__contains">
+        <span>Ingredients: </span>
+        <span *ngFor="let type of product.types">{{ type }} </span>
+      </div>
+    </div>
+    <div class="product__buttons">
+      <button *ngIf="isAuthenticated">More details -></button>
+      <div *ngIf="!isAuthenticated">
+        <p>
+          Please Login for more details
+          <span><a routerLink="/auth">Login</a></span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
