@@ -1,0 +1,153 @@
+<section class="container">
+  <h1>Create New Product Form</h1>
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div class="form-input">
+      <label for="name">Name:</label>
+      <input type="text" name="name" formControlName="name" />
+      <p
+        *ngIf="
+          this.productForm.get('name')?.invalid &&
+          this.productForm.get('name')?.touched
+        "
+      >
+        Name must be at least 3 characters long
+      </p>
+    </div>
+    <div class="form-input">
+      <label for="imagePath">Image Path:</label>
+      <input type="text" name="imagePath" formControlName="mainImagePath" />
+      <p
+        *ngIf="
+          this.productForm.get('mainImagePath')?.invalid &&
+          this.productForm.get('mainImagePath')?.touched
+        "
+      >
+        Path is not valid
+      </p>
+    </div>
+    <div formArrayName="imagePath" class="form-control">
+      <label for="imagePath">More Images</label>
+      <div
+        class="form-input-control"
+        *ngFor="let imageControl of imagePathControls; let i = index"
+        [formGroupName]="i"
+      >
+        <input type="text" formControlName="name" />
+
+        <button class="btn-danger" type="button" (click)="onDeleteImagePath(i)">
+          X
+        </button>
+      </div>
+      <p
+        *ngIf="
+          this.productForm.get('imagePath')?.invalid &&
+          this.productForm.get('imagePath')?.touched
+        "
+      >
+        Path is not valid
+      </p>
+      <div class="row">
+        <div class="col-xs-12">
+          <button type="button" class="btn-success" (click)="onAddImagePath()">
+            Add New Row
+          </button>
+        </div>
+      </div>
+    </div>
+    <div formGroupName="checkboxIngredients">
+      <div>
+        <span>Ingredients</span>
+      </div>
+      <label>
+        <input type="checkbox" formControlName="fruit" />
+        fruit
+      </label>
+      <label>
+        <input type="checkbox" formControlName="vegetable" />
+        vegetable
+      </label>
+      <label>
+        <input type="checkbox" formControlName="mixed" />
+        mixed
+      </label>
+      <label>
+        <input type="checkbox" formControlName="chocolate" />
+        chocolate
+      </label>
+      <label>
+        <input type="checkbox" formControlName="dairy-free" />
+        dairy-free
+      </label>
+      <label>
+        <input type="checkbox" formControlName="keto" />
+        keto
+      </label>
+      <label>
+        <input type="checkbox" formControlName="nut-free" />
+        nut-free
+      </label>
+      <label>
+        <input type="checkbox" formControlName="probiotic" />
+        probiotic
+      </label>
+      <label>
+        <input type="checkbox" formControlName="kids" />
+        kids
+      </label>
+    </div>
+    <div class="form-input">
+      <label for="price">Price:</label>
+      <input type="number" name="price" formControlName="price" />
+      <p
+        *ngIf="
+          this.productForm.get('price')?.invalid &&
+          this.productForm.get('price')?.touched
+        "
+      >
+        Price must be minimum 0.01
+      </p>
+    </div>
+
+    <div formGroupName="checkboxSize">
+      <div>
+        <span> Sizes </span>
+      </div>
+      <label>
+        <input type="checkbox" formControlName="4 Pieces" />
+        4 Pieces
+      </label>
+      <label>
+        <input type="checkbox" formControlName="6 Pieces" />
+        6 Pieces
+      </label>
+      <label>
+        <input type="checkbox" formControlName="8 Pieces" />
+        8 Pieces
+      </label>
+      <label>
+        <input type="checkbox" formControlName="10 Pieces" />
+        10 Pieces
+      </label>
+    </div>
+    <div class="form-input">
+      <label for="desc">Description:</label>
+      <textarea
+        name="desc"
+        id=""
+        rows="5"
+        formControlName="description"
+      ></textarea>
+      <p
+        *ngIf="
+          this.productForm.get('description')?.invalid &&
+          this.productForm.get('description')?.touched
+        "
+      >
+        Description must be at least 15 characters long
+      </p>
+    </div>
+    <button type="submit" class="btn-success" [disabled]="!productForm.valid">
+      submit
+    </button>
+  </form>
+</section>
