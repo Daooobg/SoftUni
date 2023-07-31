@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, map, of, switchMap } from 'rxjs';
+import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Router } from '@angular/router';
 
 import * as ProductsActions from './products.actions';
 import { Product } from '../product.model';
@@ -22,7 +23,11 @@ const handleError = (errorRes: any) => {
 
 @Injectable()
 export class ProductsEffects {
-  constructor(private actions$: Actions, private http: HttpClient) {}
+  constructor(
+    private actions$: Actions,
+    private http: HttpClient,
+    private router: Router
+  ) {}
 
   loadingProducts$ = createEffect(() =>
     this.actions$.pipe(
@@ -40,6 +45,35 @@ export class ProductsEffects {
       }),
       catchError((errorRes) => {
         return handleError(errorRes);
+      })
+    )
+  );
+
+  createProduct$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProductsActions.creatingStart),
+      switchMap((action) => {
+        return this.http
+          .post<ProductsResponseData>(
+            'http://localhost:5000/products/cakes',
+            {
+              product: action.product,
+            },
+            {
+              headers: { Authorization: `Bear ${action.token}` },
+            }
+          )
+          .pipe(
+            map((productData) => {
+              return ProductsActions.createSuccess({
+                products: productData.data
+              });
+            }),
+            tap(() => this.router.navigate(['/products'])),
+            catchError((errorRes) => {
+              return handleError(errorRes);
+            })
+          );
       })
     )
   );

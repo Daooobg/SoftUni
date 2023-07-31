@@ -17,20 +17,36 @@ const initialState: State = {
 
 export const productsReducer = createReducer(
   initialState,
+
+  on(ProductsActions.creatingStart, (state) => ({
+    ...state,
+    productError: null,
+    loading: true
+  })),
+
+  on(ProductsActions.createSuccess, (state, action) => ({
+    ...state,
+    productError: null,
+    loading: false,
+    products: [...action.products]
+  })),
+
   on(ProductsActions.loadingStart, (state) => ({
     ...state,
     productError: null,
     loading: true,
   })),
+
   on(ProductsActions.loadingSuccess, (state, action) => ({
     ...state,
     productError: null,
     loading: false,
     products: [...action.products],
   })),
+  
   on(ProductsActions.loadingFail, (state, action) => ({
     ...state,
     productError: action.errorMessage,
     loading: false,
-  }))
+  })),
 );
