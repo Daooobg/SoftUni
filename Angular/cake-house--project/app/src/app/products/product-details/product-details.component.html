@@ -1,0 +1,45 @@
+<div class="error" *ngIf="error">
+  <p>{{ error }}</p>
+  <a routerLink="/products">Go to products</a>
+</div>
+<div *ngIf="!error" class="product">
+  <h1>{{ product.name | uppercase }}</h1>
+  <div class="product_container">
+    <div>
+      <img [src]="activeImg" alt="" class="active-img" />
+      <div class="images-container">
+        <img
+          class="images"
+          [src]="image"
+          alt=""
+          *ngFor="let image of product.images; let i = index"
+          [ngClass]="{ active: activeImg === product.images[i] }"
+          (click)="setActiveImg(i)"
+        />
+      </div>
+    </div>
+    <div class="information">
+      <h3>Description: {{ product.description }}</h3>
+      <div class="ingredients">
+        <p>
+          Ingredients:
+          <span *ngFor="let ingredient of product.types">{{ ingredient }}</span>
+        </p>
+      </div>
+      <p>
+        Sizes:
+        <button
+          class="information_sizes"
+          *ngFor="let size of product.sizes; let i = index"
+          [ngClass]="{ 'active-size': activeSize === product.sizes[i] }"
+          (click)="setActiveSize(size)"
+        >
+          {{ size }}
+        </button>
+      </p>
+      <p>
+        Price: <span>{{ price | currency : "GBP" }}</span>
+      </p>
+    </div>
+  </div>
+</div>
