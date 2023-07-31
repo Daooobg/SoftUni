@@ -4,6 +4,8 @@ import { HomeComponent } from './home/home.component';
 import { AuthComponent } from './auth/auth.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductCreateComponent } from './products/product-create/product-create.component';
+import { ProductDetailsComponent } from './products/product-details/product-details.component';
+import { ProductsResolverService } from './products/products-resolver.service';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -14,6 +16,7 @@ const routes: Routes = [
     children: [
       { path: '', component: ProductsComponent },
       { path: 'new', component: ProductCreateComponent },
+      { path: ':slug', component: ProductDetailsComponent, resolve: [ProductsResolverService] },
     ],
   },
 ];
