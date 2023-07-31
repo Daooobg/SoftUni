@@ -1,20 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+
+import * as fromApp from '../../store/app.reducer';
+import * as productsActions from '../store/products.actions';
+import { Product } from '../product.model';
 @Component({
   selector: 'app-product-create',
   templateUrl: './product-create.component.html',
   styleUrls: ['./product-create.component.css'],
 })
-export class ProductCreateComponent implements OnInit {
+export class ProductCreateComponent implements OnInit, OnDestroy {
+  isLoading: boolean = false;
+  error: string | null = null;
+
   productForm: FormGroup;
+  productSub: Subscription;
 
   get imagePathControls() {
     // a getter!
     return (<FormArray>this.productForm.get('imagePath')).controls;
   }
 
+  constructor(private store: Store<fromApp.AppStore>) {}
+
   ngOnInit(): void {
     this.initForm();
+    this.productSub = this.store.select('products').subscribe((data) => {
+      this.isLoading = data.loading;
+      this.error = data.productError;
+    });
   }
 
   private initForm() {
@@ -103,14 +119,21 @@ export class ProductCreateComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.productForm.value);
-    console.log(this.productForm);
-    const allImages = this.getAllImagePaths();
-    const checkboxSize = this.getCheckboxData('checkboxSize');
-    const checkboxIng = this.getCheckboxData('checkboxIngredients');
+    const token: string | null = JSON.parse(
+      localStorage.getItem('userData')!
+    ).AccessToken;
+    const product: Product = {
+      description: this.productForm.get('description')?.value,
+      images: this.getAllImagePaths(),
+      price: this.productForm.get('price')?.value,
+      types: this.getCheckboxData('checkboxIngredients'),
+      name: this.productForm.get('name')?.value,
+      sizes: this.getCheckboxData('checkboxSize'),
+    };
+    this.store.dispatch(productsActions.creatingStart({ product, token }));
+  }
 
-    console.log(checkboxIng);
-    console.log(checkboxSize);
-    console.log(allImages);
+  ngOnDestroy(): void {
+    this.productSub.unsubscribe();
   }
 }
