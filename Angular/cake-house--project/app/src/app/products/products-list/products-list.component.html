@@ -22,7 +22,7 @@
       </div>
     </div>
     <div class="product__buttons">
-      <button *ngIf="isAuthenticated">More details -></button>
+      <button *ngIf="isAuthenticated" [routerLink]="product.slug">More details -></button>
       <div *ngIf="!isAuthenticated">
         <p>
           Please Login for more details
