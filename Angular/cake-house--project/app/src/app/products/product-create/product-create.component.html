@@ -1,5 +1,7 @@
 <section class="container">
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
   <h1>Create New Product Form</h1>
+  <p *ngIf="error">{{error}}</p>
   <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
     <div class="form-input">
       <label for="name">Name:</label>
