@@ -26,3 +26,12 @@ export const createSuccess = createAction(
   '[Products] Products Create Success',
   props<{ products: Product[] }>()
 );
+
+export const deleteProduct = createAction(
+  '[Products] Delete Product',
+  props<{ slug: string; token: string | null }>()
+);
+
+export const deleteProductSuccess = createAction(
+  '[Products] Delete Product Success'
+);

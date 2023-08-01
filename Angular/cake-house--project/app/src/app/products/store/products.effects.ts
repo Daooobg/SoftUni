@@ -66,8 +66,30 @@ export class ProductsEffects {
           .pipe(
             map((productData) => {
               return ProductsActions.createSuccess({
-                products: productData.data
+                products: productData.data,
               });
+            }),
+            tap(() => this.router.navigate(['/products'])),
+            catchError((errorRes) => {
+              return handleError(errorRes);
+            })
+          );
+      })
+    )
+  );
+
+  deleteProduct = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProductsActions.deleteProduct),
+      switchMap((action) => {
+        console.log('action.token', action);
+        return this.http
+          .delete(`http://localhost:5000/products/cakes/${action.slug}`, {
+            headers: { Authorization: `Bear ${action.token}` },
+          })
+          .pipe(
+            map(() => {
+              return ProductsActions.deleteProductSuccess();
             }),
             tap(() => this.router.navigate(['/products'])),
             catchError((errorRes) => {
