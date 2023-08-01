@@ -2,6 +2,10 @@
   <p>{{ error }}</p>
   <a routerLink="/products">Go to products</a>
 </div>
+<div class="error" *ngIf="errorOnDelete">
+  <p>{{ errorOnDelete }}</p>
+</div>
+<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
 <div *ngIf="!error" class="product">
   <h1>{{ product.name | uppercase }}</h1>
   <div class="product_container">
@@ -40,6 +44,9 @@
       <p>
         Price: <span>{{ price | currency : "GBP" }}</span>
       </p>
+      <div class="action-buttons">
+        <button class="information_sizes" (click)="onDelete()">Delete</button>
+      </div>
     </div>
   </div>
 </div>
