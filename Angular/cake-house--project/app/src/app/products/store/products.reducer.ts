@@ -28,7 +28,7 @@ export const productsReducer = createReducer(
     ...state,
     productError: null,
     loading: false,
-    products: [...action.products],
+    products: (state.products ?? []).concat(action.products),
   })),
 
   on(ProductsActions.editSuccess, (state, action) => ({

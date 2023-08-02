@@ -54,7 +54,7 @@ export class ProductsEffects {
       ofType(ProductsActions.creatingStart),
       switchMap((action) => {
         return this.http
-          .post<ProductsResponseData>(
+          .post<{data: Product, status: string}>(
             'http://localhost:5000/products/cakes',
             {
               product: action.product,

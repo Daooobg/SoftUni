@@ -35,7 +35,7 @@ export const loadingFail = createAction(
 
 export const createSuccess = createAction(
   '[Products] Products Create Success',
-  props<{ products: Product[] }>()
+  props<{ products: Product }>()
 );
 
 export const editSuccess = createAction(
