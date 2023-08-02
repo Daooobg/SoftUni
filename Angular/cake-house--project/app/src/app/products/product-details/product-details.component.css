@@ -71,3 +71,12 @@
 .active-size {
   border-color: black;
 }
+
+a {
+  padding: 6px;
+  text-decoration: none;
+}
+
+.information_sizes:hover {
+  border-color: black;
+}
