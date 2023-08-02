@@ -42,7 +42,6 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     }
 
     this.productSub = this.store.select('products').subscribe((product) => {
-      console.log('product', product);
       this.isLoading = product.loading;
       this.errorOnDelete = product.productError;
     });
