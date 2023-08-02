@@ -54,7 +54,7 @@ export class ProductsEffects {
       ofType(ProductsActions.creatingStart),
       switchMap((action) => {
         return this.http
-          .post<{data: Product, status: string}>(
+          .post<{ data: Product; status: string }>(
             'http://localhost:5000/products/cakes',
             {
               product: action.product,
@@ -82,9 +82,8 @@ export class ProductsEffects {
     this.actions$.pipe(
       ofType(ProductsActions.editingStart),
       switchMap((action) => {
-        console.log('slug',action.slug)
         return this.http
-          .put<{data: Product, status: string}>(
+          .put<{ data: Product; status: string }>(
             `http://localhost:5000/products/cakes/${action.slug}`,
             {
               product: action.product,
@@ -112,7 +111,6 @@ export class ProductsEffects {
     this.actions$.pipe(
       ofType(ProductsActions.deleteProduct),
       switchMap((action) => {
-        console.log('action.token', action);
         return this.http
           .delete(`http://localhost:5000/products/cakes/${action.slug}`, {
             headers: { Authorization: `Bear ${action.token}` },
