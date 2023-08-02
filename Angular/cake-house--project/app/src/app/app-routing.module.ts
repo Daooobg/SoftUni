@@ -16,7 +16,16 @@ const routes: Routes = [
     children: [
       { path: '', component: ProductsComponent },
       { path: 'new', component: ProductCreateComponent },
-      { path: ':slug', component: ProductDetailsComponent, resolve: [ProductsResolverService] },
+      {
+        path: ':slug',
+        component: ProductDetailsComponent,
+        resolve: [ProductsResolverService],
+      },
+      {
+        path: ':slug/edit',
+        component: ProductCreateComponent,
+        resolve: [ProductsResolverService],
+      },
     ],
   },
 ];
