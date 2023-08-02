@@ -179,7 +179,9 @@ export class ProductCreateComponent implements OnInit, OnDestroy {
       sizes: this.getCheckboxData('checkboxSize'),
     };
     if (this.editMode) {
-      console.log(product);
+      this.store.dispatch(
+        productsActions.editingStart({ product, token, slug: this.slug })
+      );
     } else {
       this.store.dispatch(productsActions.creatingStart({ product, token }));
     }
