@@ -24,7 +24,7 @@ export class ProductsListComponent implements OnInit, OnDestroy {
   constructor(private store: Store<fromApp.AppStore>) {}
 
   ngOnInit(): void {
-    this.store.dispatch(productsActions.loadingStart());
+    // this.store.dispatch(productsActions.loadingStart());
     this.productsSub = this.store
       .select('products')
       .subscribe((productsData) => {
