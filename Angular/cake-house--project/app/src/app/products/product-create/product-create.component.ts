@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import * as fromApp from '../../store/app.reducer';
 import * as productsActions from '../store/products.actions';
 import { Product } from '../product.model';
+import { ActivatedRoute, Params } from '@angular/router';
 @Component({
   selector: 'app-product-create',
   templateUrl: './product-create.component.html',
@@ -14,8 +15,11 @@ import { Product } from '../product.model';
 export class ProductCreateComponent implements OnInit, OnDestroy {
   isLoading: boolean = false;
   error: string | null = null;
+  editMode = false;
+  slug: string | null;
+  editProduct: Product[] | undefined;
 
-  productForm: FormGroup;
+  productForm!: FormGroup;
   productSub: Subscription;
 
   get imagePathControls() {
@@ -23,20 +27,32 @@ export class ProductCreateComponent implements OnInit, OnDestroy {
     return (<FormArray>this.productForm.get('imagePath')).controls;
   }
 
-  constructor(private store: Store<fromApp.AppStore>) {}
+  constructor(
+    private store: Store<fromApp.AppStore>,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.initForm();
+    this.route.params.subscribe((params: Params) => {
+      this.editMode = params['slug'] != null;
+      this.slug = params['slug'];
+    });
     this.productSub = this.store.select('products').subscribe((data) => {
       this.isLoading = data.loading;
       this.error = data.productError;
+      if (this.editMode) {
+        this.editProduct = data.products?.filter(
+          (product) => product.slug === this.slug
+        );
+      }
     });
+    this.initForm();
   }
 
   private initForm() {
     let productName = '';
     let mainImagePath = '';
-    let productImagePath = new FormArray([]);
+    let productImagePath = new FormArray<any>([]);
     let productDescription = '';
     let checkboxIngredients = new FormGroup({
       fruit: new FormControl(),
@@ -50,13 +66,45 @@ export class ProductCreateComponent implements OnInit, OnDestroy {
       kids: new FormControl(),
     });
     let checkboxSize = new FormGroup({
-      '4 Pieces': new FormControl(),
-      '6 Pieces': new FormControl(),
       '8 Pieces': new FormControl(),
       '10 Pieces': new FormControl(),
+      '12 Pieces': new FormControl(),
+      '14 Pieces': new FormControl(),
+      '16 Pieces': new FormControl(),
     });
     let price = 0;
-
+    if (this.editMode) {
+      if (this.editProduct) {
+        const product = this.editProduct[0];
+        productName = product.name;
+        mainImagePath = product.images[0];
+        if (product.images.length > 1) {
+          for (let i = 1; i < product.images.length; i++) {
+            productImagePath.push(
+              new FormGroup({
+                name: new FormControl(product.images[i]),
+              })
+            );
+          }
+        }
+        if (product.types) {
+          for (let type of product.types) {
+            if (type in checkboxIngredients.controls) {
+              checkboxIngredients.get(type)?.setValue(true);
+            }
+          }
+        }
+        price = product.price;
+        if (product.sizes) {
+          for (let size of product.sizes) {
+            if (size in checkboxSize.controls) {
+              checkboxSize.get(size)?.setValue(true);
+            }
+          }
+        }
+        productDescription = product.description;
+      }
+    }
     this.productForm = new FormGroup({
       name: new FormControl(productName, [
         Validators.required,
@@ -130,7 +178,11 @@ export class ProductCreateComponent implements OnInit, OnDestroy {
       name: this.productForm.get('name')?.value,
       sizes: this.getCheckboxData('checkboxSize'),
     };
-    this.store.dispatch(productsActions.creatingStart({ product, token }));
+    if (this.editMode) {
+      console.log(product);
+    } else {
+      this.store.dispatch(productsActions.creatingStart({ product, token }));
+    }
   }
 
   ngOnDestroy(): void {

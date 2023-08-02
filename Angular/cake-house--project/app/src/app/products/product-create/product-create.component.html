@@ -1,7 +1,7 @@
 <section class="container">
   <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
-  <h1>Create New Product Form</h1>
-  <p *ngIf="error">{{error}}</p>
+  <h1>{{ editMode ? "Edit" : "Create New" }} Product Form</h1>
+  <p *ngIf="error">{{ error }}</p>
   <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
     <div class="form-input">
       <label for="name">Name:</label>
@@ -115,20 +115,24 @@
         <span> Sizes </span>
       </div>
       <label>
-        <input type="checkbox" formControlName="4 Pieces" />
-        4 Pieces
-      </label>
-      <label>
-        <input type="checkbox" formControlName="6 Pieces" />
-        6 Pieces
-      </label>
-      <label>
         <input type="checkbox" formControlName="8 Pieces" />
         8 Pieces
       </label>
       <label>
         <input type="checkbox" formControlName="10 Pieces" />
         10 Pieces
+      </label>
+      <label>
+        <input type="checkbox" formControlName="12 Pieces" />
+        12 Pieces
+      </label>
+      <label>
+        <input type="checkbox" formControlName="14 Pieces" />
+        14 Pieces
+      </label>
+      <label>
+        <input type="checkbox" formControlName="16 Pieces" />
+        16 Pieces
       </label>
     </div>
     <div class="form-input">
@@ -149,7 +153,7 @@
       </p>
     </div>
     <button type="submit" class="btn-success" [disabled]="!productForm.valid">
-      submit
+      {{ editMode ? "Edit Product" : "Create Product" }}
     </button>
   </form>
 </section>
