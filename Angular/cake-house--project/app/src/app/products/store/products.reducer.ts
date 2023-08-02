@@ -2,10 +2,9 @@ import { createReducer, on } from '@ngrx/store';
 
 import * as ProductsActions from '../store/products.actions';
 import { Product } from '../product.model';
-import { state } from '@angular/animations';
 
 export interface State {
-  products: Product[] | null ;
+  products: Product[] | null;
   productError: string | null;
   loading: boolean;
 }
@@ -19,7 +18,7 @@ const initialState: State = {
 export const productsReducer = createReducer(
   initialState,
 
-  on(ProductsActions.creatingStart, (state) => ({
+  on(ProductsActions.creatingStart, ProductsActions.editingStart, (state) => ({
     ...state,
     productError: null,
     loading: true,
@@ -30,6 +29,16 @@ export const productsReducer = createReducer(
     productError: null,
     loading: false,
     products: [...action.products],
+  })),
+
+  on(ProductsActions.editSuccess, (state, action) => ({
+    ...state,
+    productError: null,
+    loading: false,
+    products:
+      state.products?.map((product) =>
+        product._id === action.product._id ? { ...action.product } : product
+      ) ?? null,
   })),
 
   on(ProductsActions.loadingStart, (state) => ({
@@ -55,12 +64,13 @@ export const productsReducer = createReducer(
     ...state,
     loading: true,
     productError: null,
-    products: state.products?.filter((product) => product.slug != action.slug) || null,
+    products:
+      state.products?.filter((product) => product.slug != action.slug) || null,
   })),
-  
+
   on(ProductsActions.deleteProductSuccess, (state) => ({
     ...state,
     loading: false,
-    productError: null
+    productError: null,
   }))
 );

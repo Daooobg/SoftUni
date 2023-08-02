@@ -7,11 +7,22 @@ export const creatingStart = createAction(
   '[Products] Creating Start',
   props<{ product: Product; token: string | null }>()
 );
+export const editingStart = createAction(
+  '[Products] Editing Start',
+  props<{ product: Product; token: string | null; slug: string | null;  }>()
+);
 
 export const loadingSuccess = createAction(
   '[Products] Products Loading Success',
   props<{
     products: Product[];
+  }>()
+);
+
+export const editingSuccess = createAction(
+  '[Products] Products Editing Success',
+  props<{
+    product: Product;
   }>()
 );
 
@@ -25,6 +36,11 @@ export const loadingFail = createAction(
 export const createSuccess = createAction(
   '[Products] Products Create Success',
   props<{ products: Product[] }>()
+);
+
+export const editSuccess = createAction(
+  '[Products] Product Edit Success',
+  props<{ product: Product }>()
 );
 
 export const deleteProduct = createAction(
