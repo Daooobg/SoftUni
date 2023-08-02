@@ -6,6 +6,8 @@ import { ProductsComponent } from './products/products.component';
 import { ProductCreateComponent } from './products/product-create/product-create.component';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
 import { ProductsResolverService } from './products/products-resolver.service';
+import { AuthGuard } from './auth/auth.guard';
+import { ErrorComponent } from './error/error.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -14,7 +16,11 @@ const routes: Routes = [
     path: 'products',
 
     children: [
-      { path: '', component: ProductsComponent },
+      {
+        path: '',
+        component: ProductsComponent,
+        resolve: [ProductsResolverService],
+      },
       { path: 'new', component: ProductCreateComponent },
       {
         path: ':slug',
@@ -24,10 +30,13 @@ const routes: Routes = [
       {
         path: ':slug/edit',
         component: ProductCreateComponent,
+        canActivate: [AuthGuard],
+        data: { expectedRole: ['owner', 'admin'] },
         resolve: [ProductsResolverService],
       },
     ],
   },
+  {path: 'error', component: ErrorComponent},
 ];
 
 @NgModule({
