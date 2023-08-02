@@ -23,6 +23,8 @@ import { ProductsListComponent } from './products/products-list/products-list.co
 import { ProductsModule } from './products/products.model';
 import { ShortenPipe } from './util/pipes/shorten.pipe';
 import { ProductCreateComponent } from './products/product-create/product-create.component';
+import { ProductDetailsComponent } from './products/product-details/product-details.component';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { ProductCreateComponent } from './products/product-create/product-create
     ProductsComponent,
     ProductsListComponent,
     ShortenPipe,
-    ProductCreateComponent
+    ProductCreateComponent,
+    ProductDetailsComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +51,7 @@ import { ProductCreateComponent } from './products/product-create/product-create
     HttpClientModule,
     StoreModule.forRoot({ auth: fromAuth.authReducer }),
     EffectsModule.forRoot([AuthEffects, ProductsEffects]),
-    ProductsModule
+    ProductsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
