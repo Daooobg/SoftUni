@@ -1,12 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
-import { Product } from '../product.model';
+import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 
+import { Product } from '../product.model';
 import * as fromApp from '../../store/app.reducer';
 import * as productsActions from '../store/products.actions';
-import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
+import { User } from 'src/app/auth/user.model';
 
 @Component({
   selector: 'app-product-details',
@@ -14,13 +15,13 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./product-details.component.css'],
 })
 export class ProductDetailsComponent implements OnInit, OnDestroy {
-  token: string | null = JSON.parse(localStorage.getItem('userData')!)
-    ?.AccessToken;
+  token: string | null;
   product: Product | any;
   error: string;
   activeImg: string;
   activeSize: string;
   price: number;
+  user: User;
 
   isLoading: boolean = false;
   errorOnDelete: string | null = null;
@@ -29,7 +30,8 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private store: Store<fromApp.AppStore>
+    private store: Store<fromApp.AppStore>,
+    private authService: AuthService
   ) {}
   ngOnInit(): void {
     this.route.data.subscribe((data: any) => {
@@ -44,6 +46,11 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     this.productSub = this.store.select('products').subscribe((product) => {
       this.isLoading = product.loading;
       this.errorOnDelete = product.productError;
+    });
+    this.authService.getUser().subscribe((authData) => {
+      if (authData.user?.role) {
+        this.user = authData.user;
+      }
     });
   }
 
@@ -62,7 +69,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     this.store.dispatch(
       productsActions.deleteProduct({
         slug: this.product.slug,
-        token: this.token,
+        token: this.user.token,
       })
     );
   }

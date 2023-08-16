@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription, map } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import * as fromApp from '../../store/app.reducer';
-import * as productsActions from '../store/products.actions';
 import { Product } from '../product.model';
+import { AuthService } from 'src/app/auth/auth.service';
+import { User } from 'src/app/auth/user.model';
 
 @Component({
   selector: 'app-products-list',
@@ -17,14 +18,16 @@ export class ProductsListComponent implements OnInit, OnDestroy {
   isLoading: boolean = false;
   isAuthenticated = false;
   role: string | undefined;
-
+  user: User | null;
   productsSub: Subscription;
   userSub: Subscription;
 
-  constructor(private store: Store<fromApp.AppStore>) {}
+  constructor(
+    private store: Store<fromApp.AppStore>,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
-    // this.store.dispatch(productsActions.loadingStart());
     this.productsSub = this.store
       .select('products')
       .subscribe((productsData) => {
@@ -32,17 +35,15 @@ export class ProductsListComponent implements OnInit, OnDestroy {
         this.products = productsData.products;
         this.error = productsData.productError;
       });
-    this.userSub = this.store
-      .select('auth')
-      .pipe(map((authState) => authState.user))
-      .subscribe((user) => {
-        this.isAuthenticated = !!user;
-        this.role = user?.role;
-      });
+    this.authService.getUser().subscribe((authData) => {
+      if (authData.user?.role) {
+        this.isAuthenticated = !!authData.user;
+        this.role = authData.user.role;
+      }
+    });
   }
 
   ngOnDestroy(): void {
     this.productsSub.unsubscribe();
-    this.userSub.unsubscribe();
   }
 }
