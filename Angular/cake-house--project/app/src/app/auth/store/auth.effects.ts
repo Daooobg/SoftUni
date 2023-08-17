@@ -154,4 +154,15 @@ export class AuthEffects {
       })
     )
   );
+
+  authLogout$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.logout),
+      tap(() => {
+        localStorage.removeItem('userData');
+        this.router.navigate(['/']);
+      })
+    ),
+    { dispatch: false }
+  );
 }

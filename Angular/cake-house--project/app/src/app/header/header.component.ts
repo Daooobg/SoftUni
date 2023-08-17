@@ -30,7 +30,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onLogout() {
-    localStorage.removeItem('userData');
     this.store.dispatch(AuthActions.logout());
   }
 }
