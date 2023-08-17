@@ -21,7 +21,7 @@ export const createOne = <T extends Services>(ModelService: T) =>
 
     const objectId = new Types.ObjectId(userId);
 
-    const data = await ModelService.createOne(req.body, objectId);
+    const data = await ModelService.createOne(req.body.product, objectId);
 
     res.status(201).json({
       status: 'success',
@@ -43,7 +43,7 @@ export const getAll = <T extends Services>(ModelService: T) =>
 export const updateOne = <T extends Services>(ModelService: T) =>
   catchAsync(async (req: Request, res: Response, next: NextFunction) => {
     
-    const data = await ModelService.updateOne(req.params.slug, req.body);
+    const data = await ModelService.updateOne(req.params.slug, req.body.product);
 
     if (!data) {
       return next(new AppError(`No data found for: ${req.params.slug}`, 404));
