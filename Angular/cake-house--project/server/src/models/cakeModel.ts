@@ -55,11 +55,11 @@ const cakeSchema = new Schema<ICake>({
       type: String,
       enum: {
         values: [
-          '8 peaces',
-          '10 peaces',
-          '12 peaces',
-          '14 peaces',
-          '16 peaces',
+          '8 Pieces',
+          '10 Pieces',
+          '12 Pieces',
+          '14 Pieces',
+          '16 Pieces',
         ],
         message: 'Cake sizes must be 8, 10, 12, 14, and 16 peaces',
       },
