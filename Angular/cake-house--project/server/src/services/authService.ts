@@ -26,7 +26,7 @@ const createAndSendToken = async (user: {
 
     const response = {
       AccessToken: token,
-      name: user.name,
+      username: user.name,
       email: user.email,
       userId: user._id,
       role: user.role,
