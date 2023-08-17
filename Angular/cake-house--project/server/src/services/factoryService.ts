@@ -2,9 +2,26 @@ import mongoose, { Model, UpdateQuery } from 'mongoose';
 import slug from 'slug';
 
 import { APIFeatures, QueryString } from '../utils/ApiFeatures';
+import { ICake } from '../models/cakeModel';
 
+interface Comment {
+  ownerId: mongoose.Types.ObjectId;
+  comment: string;
+  rating: number;
+}
 interface IProduct {
-  name?: string;
+  name: string;
+  product: string;
+  types: string[];
+  sizes: string[];
+  description: string;
+  logoDescription: string[];
+  images: string[];
+  price: number;
+  priceDiscount: number;
+  createdAt: Date;
+  slug: string;
+  comments?: Comment[];
   ownerId?: mongoose.Types.ObjectId;
 }
 
@@ -39,6 +56,36 @@ export const updateOne =
       runValidators: true,
     });
     return result;
+  };
+
+export const createComment =
+  <T extends ICake>(Model: Model<T>) =>
+  async (
+    data: UpdateQuery<T>,
+    userId: mongoose.Types.ObjectId
+  ): Promise<T | null> => {
+    const product = await Model.findOne({ slug: data.slug });
+    if (product?.comments) {
+      const userComment = product.comments.find(
+        (comment) => comment.ownerId.toString() === userId.toString()
+      );
+      if (userComment) {
+        return null;
+      }
+    }
+    const comment = await Model.findOneAndUpdate(
+      { slug: data.slug },
+      {
+        $push: {
+          comments: {
+            ownerId: userId,
+            comment: data.comment,
+            rating: data.rating,
+          },
+        },
+      }
+    );
+    return comment;
   };
 
 export const deleteOne =
