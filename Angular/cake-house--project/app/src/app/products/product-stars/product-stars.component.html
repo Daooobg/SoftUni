@@ -1,0 +1,9 @@
+<span *ngFor="let star of getTempStars()">
+  <ng-container *ngIf="star === 'star'"><mat-icon>star</mat-icon></ng-container>
+  <ng-container *ngIf="star === 'star_half'"
+    ><mat-icon>star_half</mat-icon></ng-container
+  >
+  <ng-container *ngIf="star === 'star_border'"
+    ><mat-icon>star_border</mat-icon></ng-container
+  >
+</span>
