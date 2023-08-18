@@ -25,6 +25,10 @@ import { ShortenPipe } from './util/pipes/shorten.pipe';
 import { ProductCreateComponent } from './products/product-create/product-create.component';
 import { ProductDetailsComponent } from './products/product-details/product-details.component';
 import { ErrorComponent } from './error/error.component';
+import { MatIconModule } from '@angular/material/icon';
+import { ProductStarsComponent } from './products/product-stars/product-stars.component';
+import { CapitalizeAllWordsPipe } from './util/pipes/capitalizeAllWords.pipe';
+import { CapitalizePipe } from './util/pipes/capitalizeFirstWord.pipe';
 
 @NgModule({
   declarations: [
@@ -39,9 +43,12 @@ import { ErrorComponent } from './error/error.component';
     ProductsComponent,
     ProductsListComponent,
     ShortenPipe,
+    CapitalizeAllWordsPipe,
+    CapitalizePipe,
     ProductCreateComponent,
     ProductDetailsComponent,
     ErrorComponent,
+    ProductStarsComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +59,7 @@ import { ErrorComponent } from './error/error.component';
     StoreModule.forRoot({ auth: fromAuth.authReducer }),
     EffectsModule.forRoot([AuthEffects, ProductsEffects]),
     ProductsModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
