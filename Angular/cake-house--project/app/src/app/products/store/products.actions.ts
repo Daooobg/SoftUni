@@ -7,9 +7,20 @@ export const creatingStart = createAction(
   '[Products] Creating Start',
   props<{ product: Product; token: string | null }>()
 );
+
+export const createComment = createAction(
+  '[Products] Create Comment',
+  props<{
+    slug: String;
+    comment: { rating: Number; comment: String };
+    token: String | null;
+    ownerId: {_id: String, name: String}
+  }>()
+);
+
 export const editingStart = createAction(
   '[Products] Editing Start',
-  props<{ product: Product; token: string | null; slug: string | null;  }>()
+  props<{ product: Product; token: string | null; slug: string | null }>()
 );
 
 export const loadingSuccess = createAction(

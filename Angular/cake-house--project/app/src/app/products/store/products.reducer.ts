@@ -72,5 +72,32 @@ export const productsReducer = createReducer(
     ...state,
     loading: false,
     productError: null,
+  })),
+
+  on(ProductsActions.createComment, (state, action) => ({
+    ...state,
+    products: state.products!.map((product) => {
+      if (product.slug === action.slug) {
+        const newComment = {
+          rating: +action.comment.rating,
+          comment: action.comment.comment,
+          ownerId: { _id: action.ownerId._id, name: action.ownerId.name },
+        };
+        const updatedComments = product.comments
+          ? [...product.comments, newComment]
+          : [newComment];
+        let rating = 0;
+        if (product.comments && product.averageRating) {
+          rating =
+            (+product.averageRating * product.comments.length +
+              +action.comment.rating) /
+            (product.comments.length + 1);
+        } else {
+          rating = +action.comment.rating;
+        }
+        return { ...product, comments: updatedComments, averageRating: rating };
+      }
+      return product;
+    }),
   }))
 );

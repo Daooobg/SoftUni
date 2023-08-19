@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, map, of, switchMap, tap } from 'rxjs';
+import { catchError, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Router } from '@angular/router';
 
@@ -76,6 +76,27 @@ export class ProductsEffects {
           );
       })
     )
+  );
+
+  createComment$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(ProductsActions.createComment),
+        switchMap((action) => {
+          return this.http
+            .put(
+              `http://localhost:5000/products/cakes/${action.slug}/comments`,
+              {
+                comments: action.comment,
+              },
+              {
+                headers: { Authorization: `Bear ${action.token}` },
+              }
+            )
+            .pipe(tap(() => this.router.navigate(['/products'])));
+        })
+      ),
+    { dispatch: false }
   );
 
   editProduct$ = createEffect(() =>
