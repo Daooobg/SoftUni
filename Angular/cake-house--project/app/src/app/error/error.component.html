@@ -1,5 +1,9 @@
 <div class="container">
   <div class="http-error" *ngIf="error">
-    <p>{{ error }}</p>
+    <p *ngIf="error">{{ error }}</p>
+    <p *ngIf="!error"> Page not found</p>
+  </div>
+  <div>
+    <span><a routerLink="/">Go to home page</a></span>
   </div>
 </div>
