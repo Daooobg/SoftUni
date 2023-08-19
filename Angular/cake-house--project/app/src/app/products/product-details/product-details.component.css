@@ -80,3 +80,11 @@ a {
 .information_sizes:hover {
   border-color: black;
 }
+
+.comment {
+  margin-bottom: 1rem;
+}
+
+.comment__form-ratio div {
+  display: inline-block;
+}

@@ -7,7 +7,7 @@
 </div>
 <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
 <div *ngIf="!error" class="product">
-  <h1>{{ product.name | uppercase }}</h1>
+  <h1>{{ product.name | capitalizeAll }}</h1>
   <div class="product_container">
     <div>
       <img [src]="activeImg" alt="" class="active-img" />
@@ -23,7 +23,19 @@
       </div>
     </div>
     <div class="information">
-      <h3>Description: {{ product.description }}</h3>
+      <div *ngIf="product.averageRating > 0">
+        <span>
+          <div *ngIf="product.averageRating > 0">
+            <span
+              >Rating:
+              <app-product-stars
+                [stars]="product.averageRating"
+              ></app-product-stars
+            ></span>
+          </div>
+        </span>
+      </div>
+
       <div class="ingredients">
         <p>
           Ingredients:
@@ -62,6 +74,94 @@
           "
           >Edit</a
         >
+        <hr>
+        <div>
+          <button
+            [ngClass]="{ 'active-size': buttonContent === 'Description' }"
+            class="information_sizes"
+            type="button"
+            (click)="onButtonChange($event)"
+          >
+            Description
+          </button>
+          <button
+            [ngClass]="{ 'active-size': buttonContent === 'Comments' }"
+            class="information_sizes"
+            type="button"
+            (click)="onButtonChange($event)"
+          >
+            Comments
+          </button>
+          <button
+            [ngClass]="{ 'active-size': buttonContent === 'Write a comment' }"
+            class="information_sizes"
+            type="button"
+            (click)="onButtonChange($event)"
+            *ngIf="user != null && (user.role === 'user')"
+          >
+            Write a comment
+          </button>
+        </div>
+        <div class="meta">
+          <div *ngIf="buttonContent === 'Description'">
+            <h3>{{ product.description }}</h3>
+          </div>
+          <div *ngIf="buttonContent === 'Comments'">
+            <div *ngIf="product.comments.length > 0; else noComments">
+              <div class="comment" *ngFor="let comment of product.comments">
+                <h3>From: {{ comment.ownerId.name | capitalizeAll }}</h3>
+                <app-product-stars [stars]="comment.rating"></app-product-stars>
+                <h4>Comment: {{ comment.comment | capitalize }}</h4>
+              </div>
+            </div>
+            <ng-template #noComments>
+              <p>No comments available.</p>
+            </ng-template>
+          </div>
+          <div *ngIf="buttonContent === 'Write a comment'">
+            <form
+              class="comment__form"
+              #commentForm="ngForm"
+              (ngSubmit)="onSubmitComment(commentForm)"
+              *ngIf="isComment.length === 0"
+              >
+              <div class="comment__form-ratio">
+                <div *ngFor="let option of options">
+                  <label>
+                    <input
+                      type="radio"
+                      name="options"
+                      [(ngModel)]="selectedOption"
+                      [value]="option"
+                      required
+                    />
+                    {{ option }}
+                  </label>
+                </div>
+              </div>
+              <app-product-stars
+                [stars]="+selectedOption.split(' ')[0]"
+              ></app-product-stars>
+              <div>
+                <textarea
+                  name="comment"
+                  id=""
+                  rows="5"
+                  ngModel
+                  required
+                ></textarea>
+              </div>
+              <button
+                class="information_sizes"
+                type="submit"
+                [disabled]="!commentForm.valid"
+              >
+                Submit
+              </button>
+            </form>
+            <p *ngIf="isComment.length > 0">You already give us a comment</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>

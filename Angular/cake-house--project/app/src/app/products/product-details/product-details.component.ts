@@ -2,12 +2,19 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { NgForm } from '@angular/forms';
 
 import { Product } from '../product.model';
 import * as fromApp from '../../store/app.reducer';
 import * as productsActions from '../store/products.actions';
 import { AuthService } from 'src/app/auth/auth.service';
 import { User } from 'src/app/auth/user.model';
+
+interface Comment {
+  comment: String;
+  rating: Number;
+  ownerId: { _id: String; name: String };
+}
 
 @Component({
   selector: 'app-product-details',
@@ -22,6 +29,10 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   activeSize: string;
   price: number;
   user: User;
+  buttonContent = 'Description';
+  selectedOption: string = '5 Stars';
+  options: string[] = ['1 Star', '2 Stars', '3 Stars', '4 Stars', '5 Stars'];
+  isComment: []
 
   isLoading: boolean = false;
   errorOnDelete: string | null = null;
@@ -52,6 +63,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
         this.user = authData.user;
       }
     });
+    this.isComment = this.product.comments.filter((comment: Comment) => comment.ownerId._id === this.user.userId)
   }
 
   setActiveImg(i: number) {
@@ -65,6 +77,13 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
+  onButtonChange(event: Event) {
+    const target = event.target as HTMLElement;
+    if (target.textContent) {
+      this.buttonContent = target.textContent.trim();
+    }
+  }
+
   onDelete() {
     this.store.dispatch(
       productsActions.deleteProduct({
@@ -74,6 +93,37 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     );
   }
 
+  onSubmitComment(form: NgForm) {
+    const token: string | null = JSON.parse(
+      localStorage.getItem('userData')!
+    ).AccessToken;
+    this.store.dispatch(
+      productsActions.createComment({
+        slug: this.product.slug,
+        comment: {
+          rating: +form.value.options.split(' ')[0],
+          comment: form.value.comment,
+        },
+        token,
+        ownerId: { _id: this.user.userId, name: this.user.username },
+      })
+    );
+  }
+
+  getTempStars() {
+    const tempStars = [];
+    for (let index = 0; index < 5; index++) {
+      const number = index + 0.5;
+      if (this.product.averageRating >= index + 1) {
+        tempStars.push('star');
+      } else if (this.product.averageRating >= number) {
+        tempStars.push('star_half');
+      } else {
+        tempStars.push('star_border');
+      }
+    }
+    return tempStars;
+  }
   ngOnDestroy(): void {
     this.productSub.unsubscribe();
   }
