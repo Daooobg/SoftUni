@@ -22,10 +22,17 @@ const routes: Routes = [
         component: ProductsComponent,
         resolve: [ProductsResolverService],
       },
-      { path: 'new', component: ProductCreateComponent },
+      {
+        path: 'new',
+        component: ProductCreateComponent,
+        canActivate: [AuthGuard],
+        data: { expectedRole: ['owner', 'admin'] },
+      },
       {
         path: ':slug',
         component: ProductDetailsComponent,
+        canActivate: [AuthGuard],
+        data: { expectedRole: ['owner', 'admin', 'user'] },
         resolve: [ProductsResolverService],
       },
       {
@@ -39,6 +46,7 @@ const routes: Routes = [
   },
   { path: 'about', component: AboutComponent },
   { path: 'error', component: ErrorComponent },
+  { path: '**', component: ErrorComponent },
 ];
 
 @NgModule({
