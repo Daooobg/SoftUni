@@ -8,6 +8,7 @@ import { ProductDetailsComponent } from './products/product-details/product-deta
 import { ProductsResolverService } from './products/products-resolver.service';
 import { AuthGuard } from './auth/auth.guard';
 import { ErrorComponent } from './error/error.component';
+import { AboutComponent } from './about/about.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -36,7 +37,8 @@ const routes: Routes = [
       },
     ],
   },
-  {path: 'error', component: ErrorComponent},
+  { path: 'about', component: AboutComponent },
+  { path: 'error', component: ErrorComponent },
 ];
 
 @NgModule({

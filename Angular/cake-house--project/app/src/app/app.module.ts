@@ -29,6 +29,7 @@ import { ErrorComponent } from './error/error.component';
 import { ProductStarsComponent } from './products/product-stars/product-stars.component';
 import { CapitalizeAllWordsPipe } from './util/pipes/capitalizeAllWords.pipe';
 import { CapitalizePipe } from './util/pipes/capitalizeFirstWord.pipe';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { CapitalizePipe } from './util/pipes/capitalizeFirstWord.pipe';
     ProductDetailsComponent,
     ErrorComponent,
     ProductStarsComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
