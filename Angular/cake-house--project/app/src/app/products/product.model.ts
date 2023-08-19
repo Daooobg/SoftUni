@@ -11,6 +11,12 @@ export class Product {
     public priceDiscount?: number,
     public product?: string,
     public slug?: string,
-    public _id?: string
+    public _id?: string,
+    public comments?: {
+      comment: String;
+      rating: Number;
+      ownerId: { _id: String; name: String };
+    }[],
+    public averageRating?: number 
   ) {}
 }
