@@ -13,12 +13,10 @@ export class ErrorComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       if (params['error']) {
-
         this.error = params['error'];
-      }else {
-        this.error = 'There is a problem'
+      } else {
+        this.error = 'There is a problem';
       }
-      console.log()
     });
   }
 }
