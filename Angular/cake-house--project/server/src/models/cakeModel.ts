@@ -2,7 +2,11 @@ import { Schema, model, Types, Document } from 'mongoose';
 import slug from 'slug';
 
 const startUrl = /^(https?:\/)?\/.*/i;
-
+interface Comment {
+  ownerId: Types.ObjectId;
+  comment: string;
+  rating: number;
+}
 export interface ICake extends Document {
   name: string;
   product: string;
@@ -15,7 +19,9 @@ export interface ICake extends Document {
   priceDiscount: number;
   createdAt: Date;
   slug: string;
+  comments?: Comment[];
   ownerId?: Types.ObjectId;
+  averageRating?: Number;
 }
 
 const cakeSchema = new Schema<ICake>({
@@ -110,9 +116,27 @@ const cakeSchema = new Schema<ICake>({
     default: Date.now(),
   },
   slug: String,
+  comments: [
+    {
+      ownerId: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+      },
+      comment: {
+        type: String,
+      },
+      rating: {
+        type: Number,
+      },
+    },
+  ],
   ownerId: {
     type: Schema.Types.ObjectId,
     ref: 'User',
+  },
+  averageRating: {
+    type: Number,
+    default: 0,
   },
 });
 

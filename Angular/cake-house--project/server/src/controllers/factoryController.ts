@@ -10,6 +10,7 @@ interface Services {
   getAll: (query: QueryString) => Promise<object[]>;
   updateOne: <T>(slug: string, data: UpdateQuery<T>) => {};
   deleteOne: (slug: string) => Promise<object | null>;
+  createComment: (data: {}, objectId: Types.ObjectId) => Promise<object | null>;
 }
 
 export const createOne = <T extends Services>(ModelService: T) =>
@@ -42,8 +43,10 @@ export const getAll = <T extends Services>(ModelService: T) =>
 
 export const updateOne = <T extends Services>(ModelService: T) =>
   catchAsync(async (req: Request, res: Response, next: NextFunction) => {
-    
-    const data = await ModelService.updateOne(req.params.slug, req.body.product);
+    const data = await ModelService.updateOne(
+      req.params.slug,
+      req.body.product
+    );
 
     if (!data) {
       return next(new AppError(`No data found for: ${req.params.slug}`, 404));
@@ -67,4 +70,34 @@ export const deleteOne = <T extends Services>(ModelService: T) =>
       status: 'success',
       data: null,
     });
+  });
+
+export const createComment = <T extends Services>(ModelService: T) =>
+  catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.user?._id;
+    console.log('createComment', req.body, req.params);
+    if (!userId) {
+      return next(new AppError('Please Login!', 401));
+    }
+
+    const commentData = {
+      slug: req.params.slug,
+      rating: req.body.comments.rating,
+      comment: req.body.comments.comment,
+    };
+    console.log(commentData)
+
+    const objectId = new Types.ObjectId(userId);
+
+    const data = await ModelService.createComment(commentData, objectId);
+
+    if (data) {
+      res.status(201).json({
+        status: 'success'
+      });
+    }else {
+      res.status(500).json({
+        status: 'fail'
+      })
+    }
   });

@@ -35,7 +35,7 @@ export const createOne =
 export const getAll =
   <T extends IProduct>(Model: Model<T>) =>
   async (queryData: QueryString) => {
-    const feature = new APIFeatures(Model.find(), queryData)
+    const feature = new APIFeatures(Model.find().populate({path: 'comments.ownerId', select: "name"}), queryData)
       .filter()
       .sort()
       .limitFields()
@@ -58,34 +58,46 @@ export const updateOne =
     return result;
   };
 
-export const createComment =
+  export const createComment =
   <T extends ICake>(Model: Model<T>) =>
   async (
     data: UpdateQuery<T>,
     userId: mongoose.Types.ObjectId
   ): Promise<T | null> => {
     const product = await Model.findOne({ slug: data.slug });
-    if (product?.comments) {
-      const userComment = product.comments.find(
-        (comment) => comment.ownerId.toString() === userId.toString()
-      );
-      if (userComment) {
-        return null;
-      }
+
+    if (!product) {
+      return null; // Cake not found
     }
-    const comment = await Model.findOneAndUpdate(
-      { slug: data.slug },
-      {
-        $push: {
-          comments: {
-            ownerId: userId,
-            comment: data.comment,
-            rating: data.rating,
-          },
-        },
-      }
+
+    if (!product.comments) {
+      product.comments = []; // Initialize comments array if it doesn't exist
+    }
+
+    const userComment = product.comments.find(
+      (comment) => comment.ownerId.toString() === userId.toString()
     );
-    return comment;
+
+    if (userComment) {
+      return null; // User already commented
+    }
+
+    const newComment = {
+      ownerId: userId,
+      comment: data.comment,
+      rating: data.rating,
+    };
+
+    // Update the comments array
+    product.comments.push(newComment);
+
+    // Update the averageRating field
+    const totalRating = product.comments.reduce((sum, comment) => sum + comment.rating, 0);
+    product.averageRating = totalRating / product.comments.length;
+
+    await product.save(); // Save the updated product
+
+    return product;
   };
 
 export const deleteOne =

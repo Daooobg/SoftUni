@@ -5,3 +5,4 @@ export const createOne = factoryController.createOne(cakeService);
 export const getAll = factoryController.getAll(cakeService);
 export const updateOne = factoryController.updateOne(cakeService);
 export const deleteOne = factoryController.deleteOne(cakeService);
+export const createComment = factoryController.createComment(cakeService);
