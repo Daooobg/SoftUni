@@ -64,7 +64,6 @@ export class AuthEffects {
           })
           .pipe(
             map((resData) => {
-              console.log('resData', resData);
               return handleAuthentication(
                 resData.username,
                 resData.email,
@@ -131,7 +130,7 @@ export class AuthEffects {
         if (!userData) {
           return { type: 'DUMMY' };
         }
-        console.log('userData', userData);
+
         const loadedUser = new User(
           userData.username,
           userData.email,
@@ -139,7 +138,7 @@ export class AuthEffects {
           userData.role,
           userData.AccessToken
         );
-        console.log('loadedUser', loadedUser);
+
         if (loadedUser.token) {
           return AuthActions.authenticateSuccess({
             username: loadedUser.username,
@@ -155,14 +154,15 @@ export class AuthEffects {
     )
   );
 
-  authLogout$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(AuthActions.logout),
-      tap(() => {
-        localStorage.removeItem('userData');
-        this.router.navigate(['/']);
-      })
-    ),
+  authLogout$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthActions.logout),
+        tap(() => {
+          localStorage.removeItem('userData');
+          this.router.navigate(['/']);
+        })
+      ),
     { dispatch: false }
   );
 }

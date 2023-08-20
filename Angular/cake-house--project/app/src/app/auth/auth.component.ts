@@ -22,7 +22,6 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.storeSub = this.store.select('auth').subscribe((data) => {
-      console.log('subs', data);
       this.isLoading = data.loading;
       this.error = data.authError;
     });
@@ -34,7 +33,7 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   onChangeForm() {
     this.isLogin = !this.isLogin;
-    this.error = null
+    this.error = null;
   }
 
   onSubmit(form: NgForm) {

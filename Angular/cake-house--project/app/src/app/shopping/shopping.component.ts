@@ -21,7 +21,6 @@ export class ShoppingComponent implements OnInit {
 
   ngOnInit(): void {
     this.shoppingSub = this.store.select('auth').subscribe((data) => {
-      console.log('shopping', data);
       this.shoppingProducts = data.products;
       this.totalPrice = data.products.reduce(
         (sum, product) => sum + product.price,

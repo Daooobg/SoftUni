@@ -140,7 +140,6 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
       seize: this.activeSize,
       quantity: 1,
     };
-    console.log(product);
     this.store.dispatch(AuthActions.shoppingBag({ product }));
   }
   ngOnDestroy(): void {
