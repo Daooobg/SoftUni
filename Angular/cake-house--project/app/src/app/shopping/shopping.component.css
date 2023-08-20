@@ -1,0 +1,35 @@
+.wrapper {
+  width: 60%;
+  margin: 2rem auto;
+  background-color: rgb(228, 225, 225);
+  border-radius: 10px;
+  padding: 1rem;
+}
+.empty_shopping_bag {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.product {
+  display: grid;
+  grid-template-columns: 10rem 1fr 1fr 1fr;
+  align-items: center;
+  gap: 0.3rem;
+  margin-bottom: 1rem;
+  /* color: rgb(205, 125, 141); */
+}
+
+.product__img {
+  width: 10rem;
+  height: 10rem;
+  object-fit: cover;
+}
+
+.total {
+  text-align: end;
+  margin-right: 6rem;
+}
+
+.btn {
+  cursor: pointer;
+}

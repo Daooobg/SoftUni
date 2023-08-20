@@ -1,17 +1,20 @@
 import { createReducer, on } from '@ngrx/store';
 import { User } from '../user.model';
 import * as AuthActions from './auth.actions';
+import { ShoppingProduct } from 'src/app/shopping/shopping.model';
 
 export interface State {
   user: User | null;
   authError: string | null;
   loading: boolean;
+  products: ShoppingProduct[];
 }
 
 const initialState: State = {
   user: null,
   authError: null,
   loading: false,
+  products: [],
 };
 
 export const authReducer = createReducer(
@@ -52,11 +55,16 @@ export const authReducer = createReducer(
     ...state,
     authError: null,
   })),
-  on(
-    AuthActions.logout,
-    (state) => ({
-      ...state,
-      user: null
-    })
-  ),
+  on(AuthActions.logout, (state) => ({
+    ...state,
+    user: null,
+  })),
+  on(AuthActions.shoppingBag, (state, action) => ({
+    ...state,
+    products: [...state.products, action.product],
+  })),
+  on(AuthActions.buyProducts, (state) => ({
+    ...state,
+    products: [],
+  }))
 );

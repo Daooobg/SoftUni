@@ -1,0 +1,33 @@
+<div class="wrapper">
+  <div  *ngIf="shoppingProducts.length > 0">
+    <div class="product" *ngFor="let shoppingProduct of shoppingProducts">
+      <img
+        class="product__img"
+        [src]="shoppingProduct.img"
+        [alt]="shoppingProduct.productName"
+      />
+      <h2>Name: {{ shoppingProduct.productName }}</h2>
+      <h3>Size: {{ shoppingProduct.seize }}</h3>
+      <h3>Price: {{ shoppingProduct.price }}</h3>
+    </div>
+    <h3 class="total">
+      Total Price: {{ totalPrice }}
+      <button class="btn" (click)="onBuy()">Buy</button>
+    </h3>
+    
+  </div>
+  <div *ngIf="isBought">
+    <h2>
+      Thank you for your purchase! We truly appreciate your decision to choose
+      our products and services. Your support means a lot to us, and we're
+      here to ensure your satisfaction. If you have any questions, concerns,
+      or feedback, please don't hesitate to reach out to our customer support
+      team. We're committed to providing you with the best possible
+      experience. Thank you again for trusting us with your purchase. We look
+      forward to serving you again in the future!
+    </h2>
+    <h2>Best regards,</h2>
+    <h2>Ganily</h2>
+  </div>
+  <p class="empty_shopping_bag" *ngIf="shoppingProducts.length === 0 && !isBought">Shopping Bag is empty</p>
+</div>

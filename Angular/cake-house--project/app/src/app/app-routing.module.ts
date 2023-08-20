@@ -9,6 +9,7 @@ import { ProductsResolverService } from './products/products-resolver.service';
 import { AuthGuard } from './auth/auth.guard';
 import { ErrorComponent } from './error/error.component';
 import { AboutComponent } from './about/about.component';
+import { ShoppingComponent } from './shopping/shopping.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -44,6 +45,7 @@ const routes: Routes = [
       },
     ],
   },
+  {path: 'shopping', component: ShoppingComponent},
   { path: 'about', component: AboutComponent },
   { path: 'error', component: ErrorComponent },
   { path: '**', component: ErrorComponent },

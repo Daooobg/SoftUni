@@ -7,8 +7,11 @@ import { NgForm } from '@angular/forms';
 import { Product } from '../product.model';
 import * as fromApp from '../../store/app.reducer';
 import * as productsActions from '../store/products.actions';
+import * as AuthActions from '../../auth/store/auth.actions';
+
 import { AuthService } from 'src/app/auth/auth.service';
 import { User } from 'src/app/auth/user.model';
+import { ShoppingProduct } from 'src/app/shopping/shopping.model';
 
 interface Comment {
   comment: String;
@@ -32,7 +35,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   buttonContent = 'Description';
   selectedOption: string = '5 Stars';
   options: string[] = ['1 Star', '2 Stars', '3 Stars', '4 Stars', '5 Stars'];
-  isComment: []
+  isComment: [];
 
   isLoading: boolean = false;
   errorOnDelete: string | null = null;
@@ -63,7 +66,9 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
         this.user = authData.user;
       }
     });
-    this.isComment = this.product.comments.filter((comment: Comment) => comment.ownerId._id === this.user.userId)
+    this.isComment = this.product.comments.filter(
+      (comment: Comment) => comment.ownerId._id === this.user.userId
+    );
   }
 
   setActiveImg(i: number) {
@@ -123,6 +128,20 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
       }
     }
     return tempStars;
+  }
+
+  onShopping() {
+    const product: ShoppingProduct = {
+      img: this.product.images[0],
+      slug: this.product.slug,
+      productName: this.product.name,
+      id: this.product._id,
+      price: this.price,
+      seize: this.activeSize,
+      quantity: 1,
+    };
+    console.log(product);
+    this.store.dispatch(AuthActions.shoppingBag({ product }));
   }
   ngOnDestroy(): void {
     this.productSub.unsubscribe();

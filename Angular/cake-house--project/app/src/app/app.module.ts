@@ -30,6 +30,7 @@ import { ProductStarsComponent } from './products/product-stars/product-stars.co
 import { CapitalizeAllWordsPipe } from './util/pipes/capitalizeAllWords.pipe';
 import { CapitalizePipe } from './util/pipes/capitalizeFirstWord.pipe';
 import { AboutComponent } from './about/about.component';
+import { ShoppingComponent } from './shopping/shopping.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { AboutComponent } from './about/about.component';
     ErrorComponent,
     ProductStarsComponent,
     AboutComponent,
+    ShoppingComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { ShoppingProduct } from 'src/app/shopping/shopping.model';
 
 export const loginStart = createAction(
   '[Auth] Login Start',
@@ -42,3 +43,12 @@ export const clearError = createAction('[Auth] Clear Error');
 export const autoLogin = createAction('[Auth] Auto Login');
 
 export const logout = createAction('[Auth] Logout');
+
+export const shoppingBag = createAction(
+  '[Auth] Add to shopping bag',
+  props<{
+    product: ShoppingProduct;
+  }>()
+);
+
+export const buyProducts = createAction('[Auth] Buy products')

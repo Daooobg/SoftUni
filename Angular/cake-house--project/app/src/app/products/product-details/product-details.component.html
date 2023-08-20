@@ -74,7 +74,14 @@
           "
           >Edit</a
         >
-        <hr>
+        <button
+          class="information_sizes"
+          (click)="onShopping()"
+          *ngIf="user != null && user.role === 'user'"
+        >
+          Add to shopping bag
+        </button>
+        <hr />
         <div>
           <button
             [ngClass]="{ 'active-size': buttonContent === 'Description' }"
@@ -97,7 +104,7 @@
             class="information_sizes"
             type="button"
             (click)="onButtonChange($event)"
-            *ngIf="user != null && (user.role === 'user')"
+            *ngIf="user != null && user.role === 'user'"
           >
             Write a comment
           </button>
@@ -124,7 +131,7 @@
               #commentForm="ngForm"
               (ngSubmit)="onSubmitComment(commentForm)"
               *ngIf="isComment.length === 0"
-              >
+            >
               <div class="comment__form-ratio">
                 <div *ngFor="let option of options">
                   <label>
