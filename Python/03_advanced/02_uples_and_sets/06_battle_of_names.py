@@ -9,7 +9,7 @@ for i in range(n):
     for char in name:
         char_code_sum += ord(char)
 
-    char_code_sum = int(char_code_sum / (i + 1))
+    char_code_sum = char_code_sum // (i + 1)
     if char_code_sum % 2 == 0:
         even_set.add(char_code_sum)
     else:
@@ -20,11 +20,8 @@ odd_sum = sum(odd_set)
 even_sum = sum(even_set)
 
 if odd_sum == even_sum:
-    odd_set.union(even_set)
-    print(f"{', '.join(map(str, odd_set))}")
+    print(*odd_set.union(even_set), sep=', ')
 elif odd_sum > even_sum:
-    diff = odd_set.difference(even_set)
-    print(f"{', '.join(map(str, sorted(odd_set, reverse=True)))}")
+    print(*odd_set.difference(even_set), sep=', ')
 else:
-    odd_set.update(even_set)
-    print(f"{', '.join(map(str, odd_set))}")
+    print(*odd_set.symmetric_difference(even_set), sep=', ')
